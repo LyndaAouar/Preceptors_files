@@ -8,66 +8,57 @@ editor_options:
 
 # Intro
 
-The focus of this practice session is to practice performing hypothesis tests for the difference of two means. We will look at different test statistics that can be used, and conduct hypothesis testing for correlations.
+The focus of this practice session will be to perform hypothesis tests for the difference of two or more means. We will look at various test statistics that can be used. We will also conduct hypothesis testing for correlations.
 
-# Question 1: Exercise
+## Question 1: Exercise
 
-A study is interested to check if the mean exercise hours for female are less than the mean exercise hours for male students. Use data `ExerciseHours` and the two variables `Exercise` and `Sex`.
+A study is interested in whether the mean exercise hours differs between male and female students. Conduct a permutation test to see if there is a difference. Use the data set `ExerciseHours` from the `Lock5Data` library. Make sure to extract the appropriate variables from the data frame.
 
-1.) **Step 1**:  Write the `null hypothesis`  and `alternative hypothesis` in words and in symbols.
+1.) Write the `null hypothesis`  and `alternative hypothesis` in words and in symbols.
 
-*a.)* Create a boxplot to describe hours of exercise for `female` versus `male`.
+2.) Create a boxplot to describe hours of exercise for `female` versus `male`.
 
 ```{r}
 # your code here
 ```
 
-*b.)* Find some favorites statistics of `Exercise hours` for female and male students. You might find the function: `mosaic::favstats` useful.
-*Note*: you can search online for this function arguments.
+3.) Find some favorites statistics of `Exercise hours` for `female` and `male` students. You might find the function: `mosaic::favstats` useful. *Hint*: you can search online for the function's arguments.
 
 ```{r}
 #your code here
 ```
  
-*c.)* Subset the data `ExerciseHours` to two groups: `F` and `M`.
-
-$\\$
+4.) Subset the data `ExerciseHours` to two groups: `F` and `M`.
 
 ```{r}
 #your code here
 ```
 
-2.) **Step 2**: Compute the observed statistic (mean difference of exercise hours for Female and Male).
+5.) Compute the observed statistic (mean difference of exercise hours for Female and Male).
 
 ```{r}
 #your code here
 ```
 
-$\\$
+6.) Create null hypothesis distribution
 
-3.) **Step 3**: Create null hypothesis distribution
+* a.) Shuffle the two groups of `female` and `Male` into two samples, and find the mean difference of the two shuffled samples.
 
-*a.)* Shuffle the two groups of `female` and `Male` into two samples, and find the mean difference of the two shuffled samples.
+* b.) Create the Null hypothesis Distribution using `do_it()` function.  
 
-*b.)* Create the Null hypothesis Distribution using `do_it()` function.  
-
-*c.)* Plot a `histogram` of the null distribution and show the `line` of the `observed mean difference` using the `abline()` function.
+* c.) Plot a `histogram` of the null distribution and show the `line` of the `observed mean difference` using the `abline()` function.
 
 ```{r}
 # your code here
 ```
 
-$\\$
-
-4.) **Step 4:** Calculate p-value 
+7.) Calculate p-value 
 
 ```{r}
 # your code here
 ```
 
-$\\$
-
-5.) **Step 5:**  Make a decision and state your conclusion:
+8.) Make a decision and state your conclusion:
 
 ```{r}
 #your code here
@@ -75,63 +66,55 @@ $\\$
 
 $\\$
 
-# Question 2: Caffeine Taps
+## Question 2: Caffeine Taps
 
 A sample of male college students were asked to tap their fingers at a rapid rate. The sample was then divided at random into two groups of ten students each. Each student drank the equivalent of about two cups of coffee, which included about 200 mg of caffeine for the students in one group but was decaffeinated coffee for the second group. After a two hour period, each student was tested to measure finger tapping rate (taps per minute). The goal of the experiment was to determine whether caffeine produces an increase in the average tap rate.
 
-1.) **Step 1**:  Write the `null hypothesis`  and `alternative hypothesis`  in words and in symbols.
+1.) Write the `null hypothesis`  and `alternative hypothesis`  in words and in symbols.
 
-*a.)* Create a boxplot to describe hours of exercise for `Caffeine` versus `No Caffeine`.
+2.) Create a boxplot to describe hours of exercise for `Caffeine` versus `No Caffeine`.
 
 ```{r}
 # your code here
 ```
 
-*b.)* Find some favorite statistics to visualize the number of taps for the Caffeine and No Caffeine group.
+3.) Find some favorite statistics to visualize the number of taps for the `Caffeine` and `No Caffeine` group.
 
 ```{r}
 #your code here
 ```
  
-*c.)* Subset the data `CaffeineTaps` to two groups: `Caffeine` and `NoCaffeine`.
-
-$\\$
+4.) Subset the data `CaffeineTaps` to two groups: `Caffeine` and `NoCaffeine`.
 
 ```{r}
 #your code here
 ```
 
-2.) **Step 2**: Compute the observed statistic (mean difference of tap number for the two groups).
+5.) Compute the observed statistic (mean difference of tap number for the two groups).
 
 ```{r}
 #your code here
 ```
 
-$\\$
+6.) Create null hypothesis distribution
 
-3.) **Step 3**: Create null hypothesis distribution
+* a.) Shuffle the two groups of `Caffeine` and `No Caffeine` into two samples, and find the mean difference of the two shuffled samples.
 
-*a.)* Shuffle the two groups of `Caffeine` and `No Caffeine` into two samples, and find the mean difference of the two shuffled samples.
+* b.) Create the Null hypothesis Distribution using `do_it()` function.  
 
-*b.)* Create the Null hypothesis Distribution using `do_it()` function.  
-
-*c.)* Plot a `histogram` of the null distribution and show the `line` of the `observed mean difference` using the `abline()` function.
+* c.) Plot a `histogram` of the null distribution and show the `line` of the `observed mean difference` using the `abline()` function.
 
 ```{r}
 # your code here
 ```
 
-$\\$
-
-4.) **Step 4:** Calculate p-value 
+7.) Calculate p-value 
 
 ```{r}
 # your code here
 ```
 
-$\\$
-
-5.) **Step 5:**  Make a decision and state your conclusion:
+8.) Make a decision and state your conclusion:
 
 ```{r}
 #your code here
@@ -139,21 +122,43 @@ $\\$
 
 $\\$
 
-# Question 3: Hypothesis Testing for Correlations
+## Question 3: Hypothesis Testing for Correlations
 
 Do more home runs mean more wins? In other words, is there a positive correlation between the number of home runs a team hits and the number of wins? Test this hypothesis using a permutation test. Data from the 2019 Major League Baseball (MLB) season is available in the `BaseballHits2019` dataset in the `Lock5Data` library. Make sure to extract the appropriate columns from the data.
 
-1.) **Step 1**:  Write the `null hypothesis`  and `alternative hypothesis`  in words and in symbols.
+1.) Write the `null hypothesis`  and `alternative hypothesis`  in words and in symbols.
 
-*a.)* Create a scatterplot to describe the association between `HomeRuns` and `Wins`.
+2.) Create a scatterplot to visualize the association between `HomeRuns` and `Wins`.
 
 ```{r}
 # your code here
 ```
 
-$\\$
+3.) Compute the observed statistic (correlation between `HomeRuns` and `Wins`).
 
-2.) **Step 2**: Compute the observed statistic (correlation between `HomeRuns` and `Wins`).
+```{r}
+#your code here
+```
+
+4.) Create null hypothesis distribution
+
+* a.) Shuffle the variables `HomeRuns` and `Wins` into two new variables, and find the correlation between these two new shuffled variables.
+
+* b.) Create the Null hypothesis Distribution using `do_it()` function.  
+
+* c.) Plot a `histogram` of the null distribution and show the `line` of the `observed correlation` using the `abline()` function.
+
+```{r}
+# your code here
+```
+
+5.) Calculate p-value 
+
+```{r}
+# your code here
+```
+
+6.) Make a decision and state your conclusion:
 
 ```{r}
 #your code here
@@ -161,44 +166,17 @@ $\\$
 
 $\\$
 
-3.) **Step 3**: Create null hypothesis distribution
+## Question 4: Comparing Multiple Samples: The Mean Absolute Deviation (MAD) Statistic
 
-*a.)* Shuffle the two variables of `HomeRuns` and `Wins` into two variables, and find the correlation between the two variables.
+The mean absolute deviation (MAD) statistic is a statistic that we can calculate to compare differences among more than two groups. Suppose we had 4 groups. Then the MAD statistic is given by:
 
-*b.)* Create the Null hypothesis Distribution using `do_it()` function.  
-
-*c.)* Plot a `histogram` of the null distribution and show the `line` of the `observed correlation` using the `abline()` function.
-
-```{r}
-# your code here
-```
+$\text{MAD} = \frac{|\bar{x}_1 - \bar{x}_2| + |\bar{x}_1 - \bar{x}_3| + |\bar{x}_1 - \bar{x}_4| + |\bar{x_2} - \bar{x}_3| + |\bar{x}_2 - \bar{x}_4| + |\bar{x}_3 - \bar{x}_4|}{6}$
+ 
+The Lock5Data library contains the data set `TextbookCosts`. Conduct a permutation test to see if the mean textbook cost differs among subjects. *Hint:* Follow the steps that you did for the previous exercises, except now use the `get_MAD_stat()` function to compute your observed statistic and generate your null distribution.
 
 $\\$
 
-4.) **Step 4:** Calculate p-value 
-
-```{r}
-# your code here
-```
-
-$\\$
-
-5.) **Step 5:**  Make a decision and state your conclusion:
-
-```{r}
-#your code here
-```
-
-$\\$
-
-# Question 4: The Mean Absolute Deviation (MAD) Statistic
-
-
-
-
-
-
-# Question 5: The F-Statistic
+## Question 5: Comparing Multiple Samples: The F-Statistic
 
 
 
