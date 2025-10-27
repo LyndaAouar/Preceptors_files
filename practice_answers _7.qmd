@@ -1,0 +1,13 @@
+---
+title: "Practice Session_answers _7"
+format: pdf
+editor: source
+editor_options: 
+  chunk_output_type: console
+---
+
+# Intro
+
+The focus of this practice session will be to perform hypothesis tests for the difference of two or more means. We will look at various test statistics that can be used. We will also conduct hypothesis testing for correlations.
+
+## Question 1: Exercise
