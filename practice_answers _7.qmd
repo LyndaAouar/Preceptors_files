@@ -401,14 +401,8 @@ obs_stat <- get_MAD_stat(my_data$Antibodies, my_data$Vaccine)
 
 obs_stat
 
-```
 ```{r}
-# create the null distribution
-#null_dist <- do_it(10000) * {
-#shuff_mpaa_rating <- sample(mpaa_rating)
-#get_MAD_stat(critics_score, shuff_mpaa_rating)
-#}
-#####################################################
+
 null_dist <- do_it(10000) * {
 
   # shuffle the completion times
