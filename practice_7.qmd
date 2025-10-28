@@ -177,7 +177,7 @@ The Lock5Data library contains the data set `TextbookCosts`. Conduct a permutati
 $\\$
 
 
-## Question 5: 
+## Question 5: Non-parameteric test using vacccine antibodies (Kruskal-Wills test ) 
 
 We will use data on `Antibodies` (in μg/ml) production after receiving a `Vaccine` ( Vaccine A, Vaccine B, Vaccine C). A hospital administered three different vaccines to 6 individuals each and measured the antibody presence in their blood after a chosen time period. The data is saved in  `patient_vaccine.csv`.
 
@@ -252,7 +252,7 @@ $\\$
 
 $\\$
 
-## Question 6:
+## Question 6: Compare Mad method to Kruskal-Wills test
 
 Repeat Question 5 with the randomization method `MAD` and compare your results. 
 What is your reflection.
@@ -263,5 +263,3 @@ What is your reflection.
 ```
 
 $\\$
-
-
