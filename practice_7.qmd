@@ -176,7 +176,222 @@ The Lock5Data library contains the data set `TextbookCosts`. Conduct a permutati
 
 $\\$
 
-## Question 5: Comparing Multiple Samples: The F-Statistic
+## Question 5: Comparing Multiple Samples- 
+
+$\\$
+
+## Question 5: Kruskal- Wills test
+
+We will use data on `Antibodies` (in μg/ml) production after receiving a `Vaccine` ( Vaccine A, Vaccine B, Vaccine C). A hospital administered three different vaccines to 6 individuals each and measured the antibody presence in their blood after a chosen time period. The data is saved in  `patient_vaccine.csv`.
+
+We walk you through testing for the difference between the three groups of vaccines using a different method than in class, it is called the Kruskal-Wills test.
+
+1) Create a boxplot to show the three vaccines variation in terms of the antibodies.
+
+2.) Write in words the `null hypothesis` and the `alternative hypothesis`.
+
+3.) Let prepare your data. Rank your data from all groups together in one column, name it `ranks`. *hint*: you can use function `rank`.
+
+4.) Sum the ranks for each group of the `Vaccine`. Reports those sums results.
+
+5.) Calculate the test statistic, `H`  of the Kruskal-Wills test given by the formula: 
+
+$ H = \frac{12}{N(N+1)} \sum_{i=1}^{k} \frac{R_i^2}{n_i} - 3(N+1)$
+
+Where : 
+
+* N is the total sample size
+
+* k is the number of groups we are comparing.
+
+* $ {n_i} $ is the sum of ranks for group i.
+
+* $ {R_i} $ is the sample size of group i.
+
+
+6.) Compare the test statistics`H` to the critical cutoff determined by the critical value `chi-square`. *hint*: from the chi-square table, find the chi-square `critical value` with degrees of freedom `df= k-1` . 
+
+7.) Make Judgement about your hypothesis within the context.
+
+**Answers: ** 
+
+1.) Create a boxplot to show the three vaccines variation in terms of the antibodies.
+
+```{r}
+my_data<- read.csv("PatientVaccine.csv")
+
+boxplot( my_data$Antibodies~my_data$Vaccine )
+
+```
+
+
+2.) 
+### Null Hypothesis 
+ the vaccines cause the same amount of antibodies to be produced (all three groups originate from the same distribution and have the same median)
+
+### Alternative Hypothesis 
+ At least one of the vaccines causes a different amount of antibodies to be produced (at least one group originates from a different distribution and has a different median)
+ 
+
+3.)  Let prepare your data. Rank your data from all groups together in one column, name it `ranks`. *hint*: you can use function `rank`.
+
+
+```{r}
+
+# Calculate overall ranks for the Antibodies variable and create a column named ` ranks`
+my_data$rank <- rank(my_data$Antibodies)
+
+# View the data frame with the new ranks column
+print(my_data)
+
+```
+
+4.) Sum the ranks for each group of the `Vaccine`. Reports those sums results.
+
+
+```{r}
+## Find the sum of the ranks under each vaccine group:
+#R1 <- sum(subset(my_data, Vaccine == "A")$rank)
+
+R1 <- sum(my_data$rank[my_data$Vaccine == "A"])
+
+R2 <- sum(my_data$rank[my_data$Vaccine == "B"])
+
+R3 <- sum(my_data$rank[my_data$Vaccine == "C"])
+
+## 77, 29, 65
+
+```
+
+
+5.) Calculate the test statistic, `H`  of the Kruskal-Wills test given by the formula: 
+
+$ H = \frac{12}{N(N+1)} \sum_{i=1}^{k} \frac{R_i^2}{n_i} - 3(N+1)$
+
+Where : 
+
+* N is the total sample size
+
+* k is the number of groups we are comparing.
+
+* $ {n_i} $ is the sum of ranks for group i.
+
+* $ {R_i} $ is the sample size of group i.
+
+
+```{r}
+
+# --- Kruskal–Wallis H statistic (manual formula) ---
+
+# 
+N <- 18                # total number of observations
+k <- 3                 # number of groups
+R <- c(77, 29, 65)     # sum of ranks for each group
+n <- c(6, 6, 6)        # sample sizes for each group
+
+# Compute H statistic
+H <- (12 / (N * (N + 1))) * sum((R^2) / n) - 3 * (N + 1)
+H
+
+## 7.2982
+```
+6.) Find the critical value, the cutoff determined by  `chi-square` distribution with degrees of freedom 
+`df= k-1` and ` $\alpha= 0.05 $ . 
+
+*hint1:* from the chi-square table, find the chi-square `critical value` with degrees of freedom `df= k-1` and ` $\alpha= 0.05 $ .
+
+*hint2:* or you can use `R` function: `qchisq(pth, df, lower.tail= "F" )`.
+
+
+```{r}
+# THE CRITICAL VALUE FOR Kurskal-Wills test is :
+
+cvU<- qchisq(0.05, 2, lower.tail= F )
+
+# Another way to calculate it 
+CVL<- qchisq(0.95, 2, lower.tail= T )
+
+```
+
+7.) Make Judgement about your hypothesis within the context.
+
+Since test statistics `H`=7.2982  $>$ `CV`= 5.9914, our test statistics is in the rejection region, thus, we **reject the null** and **conclude the alternative** that the data do provide enough evidence to say, there **is difference between the vaccines antibodies production**.
+
+
+**Note** You can use the function `kruskal.test` to answer the quesion 5. You will get the same conclusion.
+
+```{r}
+# To Perform the Kruskal-Wallis test you can use this function :
+kruskal_result <- kruskal.test(Antibodies ~ Vaccine, data = my_data)
+
+# View the full test results
+print(kruskal_result)
+
+## Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601
+```
+
+$\\$
+$\\$
+
+## Question 6:
+
+Repeat Question 5 with the randomization method `MAD` and compare your results. 
+What is your reflection.
+
+```{r}
+
+library(SDS1000)
+
+my_data <- read.csv("PatientVaccine.csv")
+
+# calculate the observed statistic
+
+obs_stat <- get_MAD_stat(my_data$Antibodies, my_data$Vaccine)
+
+obs_stat
+
+```
+```{r}
+# create the null distribution
+
+null_dist <- do_it(10000) * {
+
+  # shuffle the completion times
+  shuffled_Vaccine <- sample(my_data$Vaccine )
+
+  # calculate the simulated statistic
+  get_MAD_stat(my_data$Antibodies, shuffled_Vaccine)
+
+}
+
+# plot the null distribution
+hist(null_dist, #breaks = 200,#
+     main = "Null distribution",
+     xlab = "Mean absolute deviation of group means")
+
+
+# add a red vertical line at the observed statistic
+abline(v = obs_stat, col = "red")
+
+# P.Value
+
+p_value <- pnull(obs_stat, null_dist, lower.tail = FALSE)
+
+p_value
+
+### pv= 0.0433
+```
+
+**Answers:**
+
+*)
+At significance level 0.05, we can **reject the null** and conclude the **alternative**, that there is difference between the three vaccines in terms of the amounts of antibodies they procedure. Which is the dame conclusion as the method used in **question5 **.
+
+
+
+
+
+
 
 
 
