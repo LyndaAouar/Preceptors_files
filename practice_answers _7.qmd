@@ -186,48 +186,234 @@ p_value
 
 $\\$
 
+## Question 2: Caffeine Taps
 
+A sample of male college students were asked to tap their fingers at a rapid rate. The sample was then divided at random into two groups of ten students each. Each student drank the equivalent of about two cups of coffee, which included about 200 mg of caffeine for the students in one group but was decaffeinated coffee for the second group. After a two hour period, each student was tested to measure finger tapping rate (taps per minute). The goal of the experiment was to determine whether caffeine produces an increase in the average tap rate.
 
+1.) Write the `null hypothesis`  and `alternative hypothesis`  in words and in symbols.
 
+* Null: There is no difference in the average taping rate between the caffeinated and decaffeinated groups 
+* Alternative: The average taping rate is greater for the caffeinated group than for the decaffeinated group
 
+&nbsp;
 
+* $H_0: \mu_{c} - \mu_{nc} = 0$
+* $H_A: \mu_{c} - \mu_{nc} > 0$
 
+2.) Create a boxplot to describe tap rates for `Caffeine` versus `No Caffeine`.
 
+```{r}
+library(Lock5Data)
+library(SDS1000)
+boxplot(data = CaffeineTaps, Taps ~ Group)
+```
 
+3.) Find some favorite statistics to visualize the number of taps for the `Caffeine` and `No Caffeine` group.
 
+```{r}
+mosaic::favstats(Taps ~ Group, data = CaffeineTaps)
+```
+ 
+4.) Subset the data `CaffeineTaps` to two groups: `Caffeine` and `NoCaffeine`.
 
+```{r}
+Caffeine = subset(CaffeineTaps$Taps, CaffeineTaps$Group == "Caffeine")
+NoCaffeine = subset(CaffeineTaps$Taps, CaffeineTaps$Group == "NoCaffeine")
+```
 
+5.) Compute the observed statistic (mean difference of tap number for the two groups).
 
+```{r}
+diff_caffeine = mean(Caffeine) - mean(NoCaffeine)
+```
 
+6.) Create null hypothesis distribution
 
+* a.) Shuffle the two groups of `Caffeine` and `No Caffeine` into two samples, and find the mean difference of the two shuffled samples.
 
+```{r}
+combined_sample <- c(Caffeine, NoCaffeine)
+```
 
+* b.) Create the Null hypothesis Distribution using `do_it()` function.  
 
+```{r}
+null_dist <- do_it(10000) * {
+  shuffled_sample <- sample(combined_sample)
 
+  shuff_caff <- shuffled_sample[1:10]
+  shuff_nocaff <- shuffled_sample[11:20]
 
+  shuff_stat <- mean(shuff_caff) - mean(shuff_nocaff)
+}
+```
 
+* c.) Plot a `histogram` of the null distribution and show the `line` of the `observed mean difference` using the `abline()` function.
 
+```{r}
+hist(null_dist , 
+     xlab = "Difference in Mean Tap Rate", main = "Null distribution")
+abline(v = diff_caffeine, col = "blue")
+```
 
+7.) Calculate p-value 
 
+```{r}
+p_value <- pnull(diff_caffeine, null_dist, lower.tail = F) 
+p_value
+```
 
+8.) Make a decision and state your conclusion:
 
+**Since our p-value is less than 0.05, we will reject the null hypothesis. We therefore have evidence that drinking caffeinated coffee produces an increase in the average tap rate compared to those that drink decaffeinated coffee.**
 
+$\\$
 
+## Question 3: Hypothesis Testing for Correlations
 
+Do more home runs mean more wins? In other words, is there a positive correlation between the number of home runs a team hits and the number of wins? Test this hypothesis using a permutation test. Data from the 2019 Major League Baseball (MLB) season is available in the `BaseballHits2019` dataset in the `Lock5Data` library. Make sure to extract the appropriate columns from the data.
 
+1.) Write the `null hypothesis`  and `alternative hypothesis`  in words and in symbols.
 
+* Null: There is no linear association between home runs and wins
+* Alternative: There is a positive, linear association between home runs and wins
 
+&nbsp;
 
+* $H_0: \rho = 0$
+* $H_A: \rho > 0$
 
+2.) Create a scatterplot to visualize the association between `HomeRuns` and `Wins`.
 
+```{r}
+plot(BaseballHits2019$HomeRuns, BaseballHits2019$Wins,
+     xlab = "Home Runs", ylab = "Wins", 
+     main = "Wins vs Home Runs in the 2019 MLB Season")
+```
 
+3.) Compute the observed statistic (correlation between `HomeRuns` and `Wins`).
 
+```{r}
+wins_hr_corr = cor(BaseballHits2019$HomeRuns, BaseballHits2019$Wins)
+wins_hr_corr
+```
 
+4.) Create null hypothesis distribution
 
+* a.) Shuffle the variables `HomeRuns` and `Wins` into two new variables, and find the correlation between these two new shuffled variables.
 
+```{r}
+combined_sample <- c(BaseballHits2019$HomeRuns, BaseballHits2019$Wins)
+```
 
+* b.) Create the Null hypothesis Distribution using `do_it()` function.  
 
+```{r}
+null_dist <- do_it(10000) * {
+  shuffled_sample <- sample(combined_sample)
 
+  shuff_hr <- shuffled_sample[1:30]
+  shuff_wins <- shuffled_sample[31:60]
+
+  shuff_stat <- cor(shuff_hr, shuff_wins)
+}
+
+```
+
+* c.) Plot a `histogram` of the null distribution and show the `line` of the `observed correlation` using the `abline()` function.
+
+```{r}
+hist(null_dist,
+     xlab = "Correlations between Home Runs and Wins", 
+     main = "Null distribution")
+abline(v = wins_hr_corr, col = "blue")
+```
+
+5.) Calculate p-value 
+
+```{r}
+p_value <- pnull(wins_hr_corr, null_dist, lower.tail = F) 
+p_value
+```
+
+6.) Make a decision and state your conclusion:
+
+**Since our p-value is less than 0.05, we will reject the null hypothesis. We therefore have evidence that there is a positive correlation between wins and home runs.**
+
+$\\$
+
+## Question 4: Comparing Multiple Samples: The Mean Absolute Deviation (MAD) Statistic
+
+The mean absolute deviation (MAD) statistic is a statistic that we can calculate to compare differences among more than two groups. Suppose we had 4 groups. Then the MAD statistic is given by:
+
+$\text{MAD} = \frac{|\bar{x}_1 - \bar{x}_2| + |\bar{x}_1 - \bar{x}_3| + |\bar{x}_1 - \bar{x}_4| + |\bar{x_2} - \bar{x}_3| + |\bar{x}_2 - \bar{x}_4| + |\bar{x}_3 - \bar{x}_4|}{6}$
+ 
+The Lock5Data library contains the data set `TextbookCosts`. Conduct a permutation test to see if the mean textbook cost differs among subjects. *Hint:* Follow the steps that you did for the previous exercises, except now use the `get_MAD_stat()` function to compute your observed statistic and generate your null distribution.
+
+1.) Write the `null hypothesis`  and `alternative hypothesis`  in words and in symbols.
+
+* Null: There is no difference in average textbook costs among subjects
+* Alternative: There is a difference in average textbook costs among subjects
+
+2.) Compute the observed MAD statistic. Use the `get_MAD_stat()` function.
+
+```{r}
+mad_stat = get_MAD_stat(TextbookCosts$Cost, TextbookCosts$Field)
+```
+
+```{r}
+arts = subset(TextbookCosts$Cost, TextbookCosts$Field == "Arts")
+human = subset(TextbookCosts$Cost, TextbookCosts$Field == "Humanities")
+ns = subset(TextbookCosts$Cost, TextbookCosts$Field == "NaturalScience")
+ss = subset(TextbookCosts$Cost, TextbookCosts$Field == "SocialScience")
+```
+
+3.) Create null hypothesis distribution
+
+* a.) Shuffle the variables `HomeRuns` and `Wins` into two new variables, and find the correlation between these two new shuffled variables.
+
+```{r}
+combined_sample <- c(arts, human, ns, ss)
+```
+
+* b.) Create the Null hypothesis Distribution using `do_it()` function.  
+
+```{r}
+null_dist <- do_it(10000) * {
+  shuffled_sample <- sample(combined_sample)
+
+  shuff_data_frame = data.frame(
+    Cost = shuffled_sample,
+    Field = c(
+      rep("Arts", 10), rep("Humanities", 10),
+      rep("NaturalScience", 10), rep("SocialScience", 10)
+      )
+    )
+  
+  shuff_stat = get_MAD_stat(shuff_data_frame$Cost, shuff_data_frame$Field)
+}
+
+```
+
+* c.) Plot a `histogram` of the null distribution and show the `line` of the `observed correlation` using the `abline()` function.
+
+```{r}
+hist(null_dist,
+     xlab = "MAD Statistic for Textbook Costs by Field", 
+     main = "Null distribution")
+abline(v = mad_stat, col = "blue")
+```
+
+4.) Calculate p-value 
+
+```{r}
+p_value <- pnull(mad_stat, null_dist, lower.tail = F) 
+p_value
+```
+
+5.) Make a decision and state your conclusion:
+
+**Since our p-value is less than 0.05, we will reject the null hypothesis. We therefore have evidence that there is a difference in textbook cost among subjects.**
 
 $\\$
 
