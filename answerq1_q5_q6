@@ -1,0 +1,437 @@
+---
+title: "Practice Session_answers _7"
+format: pdf
+editor: source
+editor_options: 
+  chunk_output_type: console
+---
+
+# Intro
+
+The focus of this practice session will be to perform hypothesis tests for the difference of two or more means. We will look at various test statistics that can be used. We will also conduct hypothesis testing for correlations.
+
+## Question 1: Exercise Hypothesis test for the difference of two means
+
+
+A study is interested to check if the mean exercise hours for female are less than the mean exercise hours for male students. Use data `ExerciseHours` and the two variables `Exercise` and `Sex`.
+
+1.) **Step 1**:  Write the `null hypothesis`  and `alternative hypothesis`  in words and in symbols.
+
+*a.)* Create a boxplot to describe hours of exercise for `female` versus `male`.
+
+```{r}
+# your code here
+```
+
+*b.)* Find some favorites statistics of `Exercise hours` for female and male students. You might find the function: `mosaic::favstats` useful.
+*Note*: you can search online for this function arguments.
+
+```{r}
+#your code here
+```
+ 
+*c.)* Subset the data `ExerciseHours` to two groups: `F` and `M`.
+
+
+```{r}
+#your code here
+```
+
+2.) **Step 2**: Compute the observed statistic (mean difference of exercise hours for Female and Male).
+
+```{r}
+#your code here
+```
+
+3.) **Step 3**: Create null hypothesis distribution
+
+*a.)* Shuffle the two groups of `female` and `Male` into two samples, and find the mean difference of the two shuffled samples.
+
+*b.)* Create the Null hypothesis Distribution using `do_it()` function.  
+
+*c.)* Plot a `histogram' of the null distribution and show the `line` of the `observed mean difference` using the `abline()` function.
+
+```{r}
+# your code here
+```
+
+4.) **Step 4:** Calculate p-value 
+
+```{r}
+# your code here
+```
+
+**Step 5:**  Make decision/Judgment
+
+```{r}
+#your code here
+```
+
+**Answers:**
+
+```{r}
+library(Lock5Data)
+library(SDS1000)
+data(ExerciseHours)
+```
+
+1.) **Step 1**:  Write the `null hypothesis`  and `alternative hypothesis`  in words and in symbols.
+
+$\ H_0:\mu_{f}= \mu_{m}$   vs    $\ H_a: \mu_{f} < \mu_{m}$
+
+
+*a.)* Create a boxplot to describe hours of exercise for `female` versus `male`.
+
+
+```{r}
+
+boxplot(Exercise ~ Sex , data = ExerciseHours)
+
+```
+
+*b.)* Find some favorites statistics of `Exercise hours` for female and male students. You might find the function: `mosaic::favstats` useful.
+
+*Note*: you can search online for this function arguments.
+
+```{r}
+
+mosaic::favstats( Exercise ~ Sex, data = ExerciseHours)
+```
+
+*c.)* Subset the data `ExerciseHours` to two groups: `F` and `M` using `subset()` function.
+
+```{r}
+# we will use the function `subset`
+excercise_fem<- subset(  ExerciseHours$Exercise, ExerciseHours$Sex == "F")
+excercise_fem
+excercise_mal<- subset(  ExerciseHours$Exercise, ExerciseHours$Sex == "M")
+excercise_mal
+
+length(excercise_fem)
+length(excercise_mal)
+## 30
+## 20
+```
+$\\$
+
+2.) **Step 2**: Compute the observed statistic (mean difference of exercise hours for Female and Male).
+
+```{r}
+
+obs_stat <- mean(excercise_fem) - mean(excercise_mal)
+obs_stat
+## -3
+```
+$\\$
+
+3.) **Step 3:** Create null hypothesis distribution
+
+*a.)* Shuffle the two groups of `female` and `Male` into two samples, and find the mean difference of the two shuffled samples.
+
+```{r}
+combined_sample <- c(excercise_fem, excercise_mal)
+shuffled_sample <- sample(combined_sample )
+
+shuff_fem <- shuffled_sample[1:30]
+shuff_mal <- shuffled_sample[31:50]
+
+shuff_stat <- mean(shuff_fem) - mean(shuff_mal)
+shuff_stat
+# answers may vary
+```
+
+*b.)* Create the Null hypothesis Distribution  
+
+```{r}
+
+null_dist <- do_it(10000) * {
+shuffled_sample <- sample(combined_sample )
+
+shuff_fem <- shuffled_sample[1:30]
+shuff_mal <- shuffled_sample[31:50]
+
+shuff_stat <- mean(shuff_fem) - mean(shuff_mal)
+}
+```
+
+*c.)* Plot histogram of the null distribution and show the line of the observed mean difference
+
+```{r}
+hist(null_dist , xlab = "Difference in means of Exercise hous bewteen Female and Male", main = "Null distribution")
+
+abline(v = obs_stat, col = "blue")
+```
+$\\$
+
+4.) **Step 4:** Calculate p-value 
+
+```{r}
+
+p_value <- pnull(obs_stat, null_dist, lower.tail = T) 
+p_value
+#0.1038 (# answers may vary)
+```
+$\\$
+
+5.) **Step 5:**  Make decision/Judgment
+
+We fail to reject the **null hypothesis**. There are no enough evidence to conclude that there is  a mean difference in Exercise Hours between Female and Male.
+
+$\\$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$\\$
+
+## Question 5: Non-parameteric test using vacccine antibodies (Kruskal-Wills test ) 
+
+We will use data on `Antibodies` (in μg/ml) production after receiving a `Vaccine` ( Vaccine A, Vaccine B, Vaccine C). A hospital administered three different vaccines to 6 individuals each and measured the antibody presence in their blood after a chosen time period. The data is saved in  `patient_vaccine.csv`.
+
+We walk you through testing for the difference between the three groups of vaccines using a different method than in class, it is called the Kruskal-Wills test.
+
+1) Create a boxplot to show the three vaccines variation in terms of the antibodies.
+
+2.) Write in words the `null hypothesis` and the `alternative hypothesis`.
+
+3.) Let prepare your data. Rank your data from all groups together in one column, name it `ranks`. *hint*: you can use function `rank`.
+
+4.) Sum the ranks for each group of the `Vaccine`. Reports those sums results.
+
+5.) Calculate the test statistic, `H`  of the Kruskal-Wills test given by the formula: 
+
+$ H = \frac{12}{N(N+1)} \sum_{i=1}^{k} \frac{R_i^2}{n_i} - 3(N+1)$
+
+Where : 
+
+* N is the total sample size
+
+* k is the number of groups we are comparing.
+
+* $ {n_i} $ is the sum of ranks for group i.
+
+* $ {R_i} $ is the sample size of group i.
+
+
+6.) Compare the test statistics`H` to the critical cutoff determined by the critical value `chi-square`. *hint*: from the chi-square table, find the chi-square `critical value` with degrees of freedom `df= k-1` . 
+
+7.) Make Judgement about your hypothesis within the context.
+
+**Answers: ** 
+$\\$
+
+1.) Create a boxplot to show the three vaccines variation in terms of the antibodies.
+
+```{r}
+library(SDS1000)
+
+my_data<- read.csv("PatientVaccine.csv")
+boxplot( my_data$Antibodies ~ my_data$Vaccine )
+
+```
+$\\$
+
+2.) 
+### Null Hypothesis 
+ the vaccines cause the same amount of antibodies to be produced (all three groups originate from the same distribution and have the same median)
+
+### Alternative Hypothesis 
+ At least one of the vaccines causes a different amount of antibodies to be produced (at least one group originates from a different distribution and has a different median)
+ 
+$\\$
+
+3.)  Let prepare your data. Rank your data from all groups together in one column, name it `ranks`. *hint*: you can use function `rank`.
+
+
+```{r}
+
+# Calculate overall ranks for the Antibodies variable and create a column named ` ranks`
+my_data$rank <- rank(my_data$Antibodies)
+
+# View the data frame with the new ranks column
+print(my_data)
+
+```
+$\\$
+
+4.) Sum the ranks for each group of the `Vaccine`. Reports those sums results.
+
+
+```{r}
+## Find the sum of the ranks under each vaccine group:
+#R1 <- sum(subset(my_data, Vaccine == "A")$rank)
+
+R1 <- sum(my_data$rank[my_data$Vaccine == "A"])
+
+R2 <- sum(my_data$rank[my_data$Vaccine == "B"])
+
+R3 <- sum(my_data$rank[my_data$Vaccine == "C"])
+
+## 77, 29, 65
+
+```
+$\\$
+
+
+5.) Calculate the test statistic, `H`  of the Kruskal-Wills test given by the formula: 
+
+$ H = \frac{12}{N(N+1)} \sum_{i=1}^{k} \frac{R_i^2}{n_i} - 3(N+1)$
+
+Where : 
+
+* N is the total sample size
+
+* k is the number of groups we are comparing.
+
+* $ {n_i} $ is the sum of ranks for group i.
+
+* $ {R_i} $ is the sample size of group i.
+
+
+```{r}
+
+# --- Kruskal–Wallis H statistic (manual formula) ---
+
+# 
+N <- 18                # total number of observations
+k <- 3                 # number of groups
+R <- c(77, 29, 65)     # sum of ranks for each group
+n <- c(6, 6, 6)        # sample sizes for each group
+
+# Compute H statistic
+H <- (12 / (N * (N + 1))) * sum((R^2) / n) - 3 * (N + 1)
+H
+
+## 7.2982
+```
+$\\$
+
+6.) Find the critical value, the cutoff determined by  `chi-square` distribution with degrees of freedom 
+`df= k-1` and ` $\alpha= 0.05 $ . 
+
+*hint1:* from the chi-square table, find the chi-square `critical value` with degrees of freedom `df= k-1` and ` $\alpha= 0.05 $ .
+
+*hint2:* or you can use `R` function: `qchisq(pth, df, lower.tail= "F" )`.
+
+
+```{r}
+# THE CRITICAL VALUE FOR Kurskal-Wills test is :
+
+cvU<- qchisq(0.05, 2, lower.tail= F )
+
+# Another way to calculate it 
+CVL<- qchisq(0.95, 2, lower.tail= T )
+
+```
+$\\$
+
+7.) Make Judgement about your hypothesis within the context.
+
+Since test statistics `H`=7.2982  $>$ `CV`= 5.9914, our test statistics is in the rejection region, thus, we **reject the null** and **conclude the alternative** that the data do provide enough evidence to say, there **is difference between the vaccines antibodies production**.
+
+
+**Note** You can use the function `kruskal.test` to answer the quesion 5. You will get the same conclusion.
+
+```{r}
+# To Perform the Kruskal-Wallis test you can use this function :
+kruskal_result <- kruskal.test(Antibodies ~ Vaccine, data = my_data)
+
+# View the full test results
+print(kruskal_result)
+
+## Kruskal-Wallis chi-squared = 7.2982, df = 2, p-value = 0.02601
+```
+$\\$
+
+## Question 6:
+
+Repeat Question 5 with the randomization method `MAD` and compare your results. 
+What is your reflection.
+
+```{r}
+
+library(SDS1000)
+my_data <- read.csv("PatientVaccine.csv")
+
+# calculate the observed statistic
+obs_stat <- get_MAD_stat(my_data$Antibodies, my_data$Vaccine)
+obs_stat
+
+
+# create the null distribution
+null_dist <- do_it(10000) * {
+
+  # shuffle the completion times
+  shuffled_Vaccine <- sample(my_data$Vaccine )
+
+  # calculate the simulated statistic
+  get_MAD_stat(my_data$Antibodies, shuffled_Vaccine)
+
+}
+
+# plot the null distribution
+hist(null_dist, #breaks = 200,#
+     main = "Null distribution",
+     xlab = "Mean absolute deviation of group means")
+
+
+# add a red vertical line at the observed statistic
+abline(v = obs_stat, col = "red")
+
+# P.Value
+p_value <- pnull(obs_stat, null_dist, lower.tail = FALSE)
+p_value
+
+### pv= 0.0433
+```
+$\\$
+
+**Answers:**
+
+*)
+At significance level 0.05, we can **reject the null** and conclude the **alternative**, that there is difference between the three vaccines in terms of the amounts of antibodies they procedure. Which is the dame conclusion as the method used in **question5 **.
+
+
+
+
+
