@@ -19,8 +19,31 @@ A study is interested to check if the mean exercise hours for female are less th
 
 *a.)* Create a boxplot to describe hours of exercise for `female` versus `male`.
 
+* a.) Shuffle the two groups of `female` and `Male` into two samples, and find the mean difference of the two shuffled samples.
+
+* b.) Create the Null hypothesis Distribution using `do_it()` function.  
+
+* c.) Plot a `histogram` of the null distribution and show the `line` of the `observed mean difference` using the `abline()` function.
+
 ```{r}
 # your code here
+```
+
+7.) Calculate p-value 
+
+```{r}
+# your code here
+```
+
+8.) Make a decision and state your conclusion:
+
+```{r}
+#your code here
+```
+
+$\\$
+
+## Question 2: Caffeine Taps
 ```
 
 *b.)* Find some favorites statistics of `Exercise hours` for female and male students. You might find the function: `mosaic::favstats` useful.
