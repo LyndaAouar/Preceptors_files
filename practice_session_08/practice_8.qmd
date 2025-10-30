@@ -1,1 +1,43 @@
+---
+title: "Practice Session 8"
+format: pdf
+editor: source
+editor_options: 
+  chunk_output_type: console
+---
 
+# Intro
+
+The focus of this practice session will be to perform hypothesis tests for the difference of two or more means. We will look at various test statistics that can be used. We will also conduct hypothesis testing for correlations.
+
+## Question 1: Exercise Hypothesis test for the difference of two means
+
+
+A study is interested to check if the mean exercise hours for female are less than the mean exercise hours for male students. Use data `ExerciseHours` and the two variables `Exercise` and `Sex`.
+
+1.) **Step 1**:  Write the `null hypothesis`  and `alternative hypothesis`  in words and in symbols.
+
+*a.)* Create a boxplot to describe hours of exercise for `female` versus `male`.
+
+```{r}
+# your code here
+```
+
+*b.)* Find some favorites statistics of `Exercise hours` for female and male students. You might find the function: `mosaic::favstats` useful.
+*Note*: you can search online for this function arguments.
+
+```{r}
+#your code here
+```
+ 
+*c.)* Subset the data `ExerciseHours` to two groups: `F` and `M`.
+
+
+```{r}
+#your code here
+```
+
+2.) **Step 2**: Compute the observed statistic (mean difference of exercise hours for Female and Male).
+
+```{r}
+#your code here
