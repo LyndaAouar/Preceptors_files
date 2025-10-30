@@ -257,6 +257,7 @@ $\\$
 Repeat Question 5 with the randomization method `MAD` and compare your results. 
 What is your reflection.
 
+We will use data on `Antibodies` (in μg/ml) production after receiving a `Vaccine` ( Vaccine A, Vaccine B, Vaccine C). A hospital administered three different vaccines to 6 individuals each and measured the antibody presence in their blood after a chosen time period. The data is saved in  `patient_vaccine.csv`.
 
 ```{r}
 #your code here
