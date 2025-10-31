@@ -10,20 +10,25 @@ editor_options:
 
 The focus of this practice session will be to perform hypothesis tests for the difference of two or more means. We will look at various test statistics that can be used. We will also conduct hypothesis testing for correlations.
 
-## Question 1: Exercise Hypothesis test for the difference of two means
 
 
-A study is interested to check if the mean exercise hours for female are less than the mean exercise hours for male students. Use data `ExerciseHours` and the two variables `Exercise` and `Sex`.
 
-1.) **Step 1**:  Write the `null hypothesis`  and `alternative hypothesis`  in words and in symbols.
+## Question : Hypothesis test for one prortion using ** Randominized distribution**, Noraml Distribution **, ** Standard Normal Distribution**
 
-*a.)* Create a boxplot to describe hours of exercise for `female` versus `male`.
 
-* a.) Shuffle the two groups of `female` and `Male` into two samples, and find the mean difference of the two shuffled samples.
+Incentives for Quitting Smoking: Do They Work? Exercise 5.31 describes a study examining incentives to quit smoking. With no incentives, the proportion of smokers trying to quit who are still abstaining six months later is about 0.06. Participants in the study were randomly assigned to one of four different incentives, and the proportion successful was measured six months later. Of the 498 participants in the group with the least success, 47 were still abstaining from smoking six months later. We wish to test to see if this provides evidence that even the smallest incentive works better than the proportion of 0.06 with no incentive at all.
 
-* b.) Create the Null hypothesis Distribution using `do_it()` function.  
+1.) State the null and alternative hypotheses, and give the notation and value of the sample statistic.
 
-* c.) Plot a `histogram` of the null distribution and show the `line` of the `observed mean difference` using the `abline()` function.
+2.) Use a randomization distribution and the observed sample statistic to find the p-value.
+
+3.) Give the mean and standard error of the normal distribution that most closely matches the randomization distribution, and then use this normal distribution with the observed sample statistic to find the p-value.
+
+4.) Use the standard error found from the randomization distribution in part (2) to find the standardized test statistic, and then use that test statistic to find the p-value using a standard normal distribution.
+
+5.) Compare the p-values from parts (2), (3), and (4). Use any of these p-values to give the conclusion of the test.
+
+**Answers:**
 
 ```{r}
 # your code here
