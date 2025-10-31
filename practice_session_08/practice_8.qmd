@@ -29,43 +29,103 @@ Incentives for Quitting Smoking: Do They Work? Exercise 5.31 describes a study e
 5.) Compare the p-values from parts (2), (3), and (4). Use any of these p-values to give the conclusion of the test.
 
 **Answers:**
+---
+title: "Untitled"
+format: pdf
+editor: visual
+---
+
 
 ```{r}
-# your code here
+
+
 ```
 
-7.) Calculate p-value 
+###Question: Incentives for Quitting Smoking: Do They Work?
 
-```{r}
-# your code here
-```
+With no incentives, the proportion of smokers trying to quit who are still abstaining six months later is about 0.06. Participants in the study were randomly assigned to one of four different incentives, and the proportion successful was measured six months later. Of the 498 participants in the group with the least success, 47 were still abstaining from smoking six months later.
+We wish to test to see if this provides evidence that even the smallest incentive works better than the proportion of 0.06 with no incentive at all.
 
-8.) Make a decision and state your conclusion:
+1.) State the null and alternative hypotheses, and give the notation and value of the sample statistic.
 
-```{r}
-#your code here
-```
 
-$\\$
-
-## Question 2: Caffeine Taps
-```
-
-*b.)* Find some favorites statistics of `Exercise hours` for female and male students. You might find the function: `mosaic::favstats` useful.
-*Note*: you can search online for this function arguments.
+ 
+2.) Use a randomization distribution and the observed sample statistic to find the p-value.
 
 ```{r}
 #your code here
 ```
  
-*c.)* Subset the data `ExerciseHours` to two groups: `F` and `M`.
+
+3.) Give the mean and standard error of the normal distribution that most closely matches the randomization distribution, and then use this normal distribution with the observed sample statistic to find the p-value.
+
+```{r}
+#your code here
+```
+ 
+
+4.) Use the standard error found from the randomization distribution in part (2) to find the standardized test statistic, and then use that test statistic to find the p-value using a standard normal distribution.
+
+```{r}
+#your code here
+```
+ 
+
+
+5.) Compare the p-values from parts (2), (3), and (4). Use any of these p-values to give the conclusion of the test.
 
 
 ```{r}
 #your code here
 ```
+ 
 
-2.) **Step 2**: Compute the observed statistic (mean difference of exercise hours for Female and Male).
+**Answers:**
+
+1.) This is a test for a single proportion. Using $p$ for the proportion of people who can successfully quit smoking using the incentive, the hypotheses are:
+
+$$
+\begin{array}{ll}
+H_0: & p=0.06 \\
+H_a: & p>0.06
+\end{array}
+$$
+
+
+The sample statistic is $\hat{p}=47 / 498=0.094$.
+
+
+2.) A randomization distribution for proportions in samples of size 498 when $p=0.06$ is shown below. The proportion of these samples at or above the original sample $\hat{p}=0.094$ gives a p -value of 0.0016 .
 
 ```{r}
 #your code here
+```
+ 
+
+
+3.) The standard error in the randomization distribution above is $S E=0.011$ and the null hypothesis is $p=0.06$, so we use a $N(0.06,0.011)$ distribution to find the p -value. The area above the original proportion of $\hat{p}=0.094$ in the figure on the left below gives a p -value of 0.0010 .
+
+```{r}
+#your code here
+```
+ 
+
+4.) The null hypothesis proportion is 0.06 and the standard error from the randomization distribution in (2) is 0.011 , so the standardized test statistic is:
+
+$$
+z=\frac{\text { Sample Statistic - Null Parameter }}{S E}=\frac{0.094-0.06}{0.011}=3.091
+$$
+
+
+The area beyond this value in the right tail of a standard normal distribution (shown on the right above) is 0.001 , so we have
+
+$$
+\mathrm{p} \text {-value }=0.001
+$$
+
+
+
+5.) The p -values are very similar, as we expect. In every case, at a $5 \%$ level, we reject $H_0$. We have strong evidence to conclude that the proportion of smokers who quit after incentives is more than 0.06 , so incentives appear to help people quit smoking.
+
+
+
