@@ -6,42 +6,135 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Intro
+### Introduction: 
 
-The focus of this practice session will be to perform hypothesis tests for the difference of two or more means. We will look at various test statistics that can be used. We will also conduct hypothesis testing for correlations.
+**Distribution of a Sample Proportion:**
+
+Note that the When selecting random samples of size $n$ from a population with proportion $p$, the distribution of the sample proportions is centered at the population proportion $p$, has standard error given by
+
+$$
+SE=\sqrt{\frac{p(1-p)}{n}}
+$$
+
+and is reasonably normally distributed if $np\geq 10$ and $n(1-p)\geq 10$.
+
+
+**Confidence Interval for a Proportion:**
+
+If $z^*$ is a standard normal endpoint to give the desired level of confidence, and if the sample size is large enough so that $n \widehat{p} \geq 10$ and $n(1-\widehat{p}) \geq 10$, the confidence interval for a population proportion $p$ is
+
+$$
+\text { Sample statistic } \pm z^* \cdot SE
+$$
+Where `sample proportion` based on a random sample of size $n$ and the `standard error` are  
+$$ \text { Sample statistic }=\widehat{p} \ $$
+
+
+$$ SE=\sqrt{\frac{\widehat{p}(1-\widehat{p})}{n}} $$
+
+**Hypothesis Test for a Proportion:**
+
+If the  sample size is reasonably large so that $n p_{\mathrm{O}} \geq 10$, then we can 
+
+test $H_{\mathrm{O}}: p=p_{\mathrm{O}}$ vs $H_a: p \neq p_{\mathrm{O}}$ (or a one-tail alternative),and 
+
+ the standardized test statistic is: 
+
+$$
+z=\frac{\text { Statistic }- \text { Null Value }}{S E}=\frac{\widehat{p}-p_0}{\sqrt{\frac{p_0\left(1-p_0\right)}{n}}}
+$$
 
 
 
 
-## Question : Hypothesis test for one prortion using ** Randominized distribution**, Noraml Distribution **, ** Standard Normal Distribution**
+
+## Question 3 : Hypothesis test for one prortion using ** Randominized distribution**, Noraml Distribution **, ** Standard Normal Distribution**
 
 
 Incentives for Quitting Smoking: Do They Work? Exercise 5.31 describes a study examining incentives to quit smoking. With no incentives, the proportion of smokers trying to quit who are still abstaining six months later is about 0.06. Participants in the study were randomly assigned to one of four different incentives, and the proportion successful was measured six months later. Of the 498 participants in the group with the least success, 47 were still abstaining from smoking six months later. We wish to test to see if this provides evidence that even the smallest incentive works better than the proportion of 0.06 with no incentive at all.
 
 1.) State the null and alternative hypotheses, and give the notation and value of the sample statistic.
 
+```{r}
+#your code here
+```
+ 
 2.) Use a randomization distribution and the observed sample statistic to find the p-value.
-
-3.) Give the mean and standard error of the normal distribution that most closely matches the randomization distribution, and then use this normal distribution with the observed sample statistic to find the p-value.
-
-4.) Use the standard error found from the randomization distribution in part (2) to find the standardized test statistic, and then use that test statistic to find the p-value using a standard normal distribution.
-
-5.) Compare the p-values from parts (2), (3), and (4). Use any of these p-values to give the conclusion of the test.
-
-**Answers:**
----
-title: "Untitled"
-format: pdf
-editor: visual
----
 
 
 ```{r}
-
-
+#your code here
 ```
+ 
+3.) Give the mean and standard error of the normal distribution that most closely matches the randomization distribution, and then use this normal distribution with the observed sample statistic to find the p-value.
 
-###Question: Incentives for Quitting Smoking: Do They Work?
+```{r}
+#your code here
+```
+ 
+
+4.) Use the standard error found from the randomization distribution in part (2) to find the standardized test statistic, and then use that test statistic to find the p-value using a standard normal distribution.
+
+```{r}
+#your code here
+```
+ 
+5.) Compare the p-values from parts (2), (3), and (4). Use any of these p-values to give the conclusion of the test.
+
+
+```{r}
+#your code here
+```
+ 
+**Answers:**
+
+1.) This is a test for a single proportion. Using $p$ for the proportion of people who can successfully quit smoking using the incentive, the hypotheses are:
+
+$$
+\begin{array}{ll}
+H_0: & p=0.06 \\
+H_a: & p>0.06
+\end{array}
+$$
+
+
+The sample statistic is $\hat{p}=47 / 498=0.094$.
+
+
+2.) A randomization distribution for proportions in samples of size 498 when $p=0.06$ is shown below. The proportion of these samples at or above the original sample $\hat{p}=0.094$ gives a p -value of 0.0016 .
+
+```{r}
+#your code here
+```
+ 
+
+
+3.) The standard error in the randomization distribution above is $S E=0.011$ and the null hypothesis is $p=0.06$, so we use a $N(0.06,0.011)$ distribution to find the p -value. The area above the original proportion of $\hat{p}=0.094$ in the figure on the left below gives a p -value of 0.0010 .
+
+```{r}
+#your code here
+```
+ 
+
+4.) The null hypothesis proportion is 0.06 and the standard error from the randomization distribution in (2) is 0.011 , so the standardized test statistic is:
+
+$$
+z=\frac{\text { Sample Statistic - Null Parameter }}{S E}=\frac{0.094-0.06}{0.011}=3.091
+$$
+
+
+The area beyond this value in the right tail of a standard normal distribution (shown on the right above) is 0.001 , so we have
+
+$$
+\mathrm{p} \text {-value }=0.001
+$$
+
+5.) The p -values are very similar, as we expect. In every case, at a $5 \%$ level, we reject $H_0$. We have strong evidence to conclude that the proportion of smokers who quit after incentives is more than 0.06 , so incentives appear to help people quit smoking.
+
+
+
+
+### Question: Incentives for Quitting Smoking: Do They Work?
 
 With no incentives, the proportion of smokers trying to quit who are still abstaining six months later is about 0.06. Participants in the study were randomly assigned to one of four different incentives, and the proportion successful was measured six months later. Of the 498 participants in the group with the least success, 47 were still abstaining from smoking six months later.
 We wish to test to see if this provides evidence that even the smallest incentive works better than the proportion of 0.06 with no incentive at all.
@@ -92,7 +185,8 @@ H_a: & p>0.06
 $$
 
 
-The sample statistic is $\hat{p}=47 / 498=0.094$.
+The sample statistic is $\hat{p}=47/498=0.094$.
+
 
 
 2.) A randomization distribution for proportions in samples of size 498 when $p=0.06$ is shown below. The proportion of these samples at or above the original sample $\hat{p}=0.094$ gives a p -value of 0.0016 .
@@ -126,6 +220,97 @@ $$
 
 
 5.) The p -values are very similar, as we expect. In every case, at a $5 \%$ level, we reject $H_0$. We have strong evidence to conclude that the proportion of smokers who quit after incentives is more than 0.06 , so incentives appear to help people quit smoking.
+
+
+### Question 4: Confidence Interval
+
+Survival of ICU Patients in the dataset `ICUAdmissions` includes information on 200 patients admitted to an Intensive Care Unit. One of the variables, Status, indicates whether each patient lived (indicated with a 0) or died (indicated with a 1). 
+
+Construct and interpret a 95% confidence interval for the proportion of ICU patients who live.
+
+
+```{r}
+#your code here
+```
+ 
+**Answers:**
+
+* a.)* Load the Data
+
+```{r}
+library(SDS1000)
+library(Lock5Data)
+data(ICUAdmissions)
+
+```
+
+We see in the dataset `ICUAdmissions` that 160 of the patients in the sample lived and 40 died. The sample proportion who live is:
+$\widehat{p}=160 / 200=0.80$.
+
+Since there are more than 10 in the living and the dying groups in the sample, we may use the normal approximation to construct a confidence interval for the proportion who live. 
+
+$n \widehat{p}= 200* 0.8= 160 \geq 10$ and $n(1-\widehat{p}=200*(1-0.8)= 40 \geq 10$
+
+For $95 \%$ confidence the standard normal endpoint is $z^*=1.96$, so we compute the interval with
+
+$$
+0.80 \pm 1.96 \sqrt{\frac{0.80(1-0.80)}{200}}=0.80 \pm 0.055=(0.745,0.855)
+$$
+
+
+We are $95 \%$ sure that the proportion of ICU patients (at this hospital) who live is between $74.5 \%$ and $85.5 \%$.
+
+
+### Question 5: Is B a Good Choice on a Multiple-Choice Exam?
+
+Multiple-choice questions on Advanced Placement exams have five options: A, B, C, D, and E. 
+A random sample of the correct choice on 400 multiple-choice questions on a variety of AP exams shows that B was the most common correct choice, with 90 of the 400 questions having B as the answer. 
+
+Does this provide evidence that B is more likely to be the correct choice than would be expected if all five options were equally likely? Show all details of the test. The data are available in APMultipleChoice.
+
+```{r}
+#your code here
+```
+ 
+**Answers:**
+```{r}
+library(SDS1000)
+library(Lock5Data)
+data(APMultipleChoice)
+```
+
+ the sample proportion of smokers is $\widehat{p}=90 / 400 =0.225$. 
+ 
+ The hypotheses are:
+
+$$
+\begin{array}{ll}
+H_0: & p=0.20 \\
+H_a: & p \neq 0.20
+\end{array}
+$$
+
+
+The test statistic is:
+
+```{r}
+
+```
+
+
+$$
+z=\frac{\text { Sample statistic }- \text { Null paramete }}{S E}=\frac{\widehat{p}-p_0}{\sqrt{\frac{p_0\left(1-p_0\right)}{n}}}=\frac{0.225-0.20}{\sqrt{\frac{0.2(0.8)}{400}}}=   .
+$$
+
+
+This is a two-tail test, so the p -value is twice the area  above  in a standard normal distribution.
+
+We see that the p -value is $2(0.0024)=$ 0.0048. 
+
+This small p-value leads us to reject $H_{\mathrm{O}}$. We find strong evidence that the proportion of smokers is not $20 \%$.
+
+
+
 
 
 
