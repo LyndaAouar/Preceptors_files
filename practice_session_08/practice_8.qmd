@@ -48,6 +48,15 @@ $$
 
 
 
+
+
+
+
+
+
+
+$\\$
+
 ## Question 3 : Hypothesis test for one prortion using ** Randominized distribution**, Noraml Distribution **, ** Standard Normal Distribution**
 
 
@@ -133,8 +142,9 @@ $$
 
 
 
+$\\$ 
 
-### Question: Incentives for Quitting Smoking: Do They Work?
+### Question 4: Incentives for Quitting Smoking: Do They Work?
 
 With no incentives, the proportion of smokers trying to quit who are still abstaining six months later is about 0.06. Participants in the study were randomly assigned to one of four different incentives, and the proportion successful was measured six months later. Of the 498 participants in the group with the least success, 47 were still abstaining from smoking six months later.
 We wish to test to see if this provides evidence that even the smallest incentive works better than the proportion of 0.06 with no incentive at all.
@@ -221,6 +231,7 @@ $$
 
 5.) The p -values are very similar, as we expect. In every case, at a $5 \%$ level, we reject $H_0$. We have strong evidence to conclude that the proportion of smokers who quit after incentives is more than 0.06 , so incentives appear to help people quit smoking.
 
+$\\$
 
 ### Question 4: Confidence Interval
 
@@ -260,6 +271,8 @@ $$
 
 We are $95 \%$ sure that the proportion of ICU patients (at this hospital) who live is between $74.5 \%$ and $85.5 \%$.
 
+
+$\\$
 
 ### Question 5: Is B a Good Choice on a Multiple-Choice Exam?
 
