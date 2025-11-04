@@ -66,6 +66,8 @@ $\\$
 
 # Part 4: 
 
+## Intro:
+
 **Distribution of a Sample Proportion:**
 
 When selecting random samples of size $n$ from a population with proportion $\pi$, the distribution of the sample proportions is centered at the population proportion $\pi$, and has a standard error given by:
@@ -74,9 +76,9 @@ $$
 SE=\sqrt{\frac{\pi(1-\pi)}{n}}
 $$
 
-and is reasonably normally distributed if $n\pi\geq 10$ and $n(1-\pi)\geq 10$.
+and is reasonably normally distributed if $n\pi\geq 10$  and  $n(1-\pi)\geq 10$.
 
-
+$\\$
 **Confidence Interval for a Proportion:**
 
 If $z^*$ is a standard normal endpoint to give the desired level of confidence, and if the sample size is large enough so that $n \widehat{p} \geq 10$ and $n(1-\widehat{p}) \geq 10$, the confidence interval for a population proportion $\pi$ is
@@ -90,6 +92,8 @@ Where sample proportion based on a random sample of size $n$ and the standard er
 $$ \text { Sample statistic }=\widehat{p} \ $$
 
 $$ SE=\sqrt{\frac{\widehat{p}(1-\widehat{p})}{n}} $$
+
+$\\$
 
 **Hypothesis Test for a Proportion:**
 
@@ -155,5 +159,3 @@ With no incentives, the proportion of smokers trying to quit who are still absta
 ```{r}
 #your code here
 ```
- 
-
