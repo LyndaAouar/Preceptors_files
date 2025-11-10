@@ -1,5 +1,5 @@
 ---
-title: "Practice Session 8"
+title: "Practice Session 9"
 format: pdf
 editor: source
 editor_options: 
@@ -8,7 +8,7 @@ editor_options:
 
 # Introduction to Type 1 and Type 2 Errors
 
-In hypothesis testing, we either reject or fail to reject the null hypothesis. However, we can sometimes make the wrong decision. A Type 1 error results when we reject the null hypothesis, but the null hypothesis is actually true. A Type 2 error occurs when we fail to reject the null hypothesis, but the null hypothesis is actually false. One important fact to note is that the significance level that we use for p-values (typically 0.05) is the likelihood that we make a Type 1 error.
+In hypothesis testing, we need to decide whether we are going to reject the null hypothesis, or fail to reject the null hypothesis. We sometimes, however, make the wrong decision. A **Type 1** error occurs when we reject the null hypothesis, but the null hypothesis is actually true. A **Type 2** error occurs when we fail to reject the null hypothesis, but the null hypothesis is actually false. The probability that we make a Type 1 error is also known as the significance level. Typically, we set our significance level to be 0.05 in hypothesis testing.
 
 # Type 1, Type 2, or Neither?
 
@@ -35,15 +35,83 @@ c.) A test for an infectious disease gives a positive result if a patient is bel
 * A negative test result; the patient actually has the disease
 * A negative test result; the patient doesn't actually have the disease
 
-# Single Sample T Test
+In the context of this question, which error (Type 1 or Type 2) would be more problematic? If you could make one of these errors less likely to occur, which one would it be, and why?
 
-According to a local statistics instructor, the average score on his first exam of the semester (`exam1`) is historically around 80%. Run a one sample T test to see if this year's students performed significantly better than the historic average. Use the formulas learned in class to perform the test, and do the calculations using R. The data is available in the `StatsGrades` data set from the `Lock5Data` library. 
+# Introduction to the One Sample T Test
+
+When our data is not normally distributed, or we cannot reliably use the normal distribution, we can still perform hypothesis testing using the t distribution. Let $n$ be the sample size, $\bar{x}$ be the sample mean, and $s$ be the sample standard deviation. The formula for the estimated standard error (SE) of the sample mean, and the t statistic are below. 
+
+$$\text{SE} = \frac{s}{\sqrt{n}}$$
+
+$$\text{t Statistic} = \frac{\bar{x} - \mu_0}{\frac{s}{\sqrt{n}}} \sim t(df = n - 1)$$
+
+Where $df = n - 1$ is the degrees of freedom of the test. This formula is for the one sample t test. 
+
+# One Sample T Test
+
+According to a local statistics instructor, the average score on his first exam of the semester (`Exam1`) is historically around 80%. The data is available in the `StatsGrades` data set from the `Lock5Data` library. 
+
+a.) First visualize the data using a boxplot and a histogram. Do you see any outliers?
+
+```{r}
+# Your code here
+```
+
+b.) Run a one sample t test to see if this year's students performed significantly better than the historic average. Use the formulas learned in class to perform the test, and do the calculations using R. What do you conclude?
+
+```{r}
+# Your code here
+```
+
+c.) Add a red vertical line to your histogram at the sample mean estimate. Does this visualization help confirm your conclusion from the hypothesis test?
+
+```{r}
+# Your code here
+```
+
+# Introduction to the Two Sample T Test
+
+Similar to the one sample case, we can compute a standard error and t-statistic to perform a two sample test. Suppose we have two samples, sample 1 and sample 2. To conduct the test, we need the following information:
+
+* $n_1$ = sample size for sample 1
+* $n_2$ = sample size for sample 2
+* $\bar{x}_1$ = sample mean for sample 1
+* $\bar{x}_2$ = sample mean for sample 2
+* $s_1$ = sample standard deviation for sample 1
+* $s_2$ = sample standard deviation for sample 2
+
+$$\text{SE} = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$$
+
+$$\text{t Statistic} = \frac{\bar{x}_2 - \bar{x}_1}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}} \sim t(df = \min\{n_1 - 1, n_2 - 1\})$$
+Where $df = \min\{n_1 - 1, n_2 - 1\}$ is the degrees of freedom for the test.
 
 # Two Sample T Test
 
-The same local statistics instructor believes that students perform the same on the first exam (`exam1`) and the second exam (`exam2`). Run a two sample T test to see if this year's students performed differently on the two exams. Use the formulas learned in class to perform the test, and do the calculations using R. The data is available in the `StatsGrades` data set from the `Lock5Data` library. 
+The same local statistics instructor believes that students perform the same on the first exam (`Exam1`) and the second exam (`Exam2`). Again, the data is available in the `StatsGrades` data set from the `Lock5Data` library. 
+
+a.) First visualize both sets of exam scores using side-by-side boxplots. Comment on what you notice. 
+
+```{r}
+# Your code here
+```
+
+b.) Run a two sample t test to see if this year's students performed differently on the two exams. Use the formulas learned in class to perform the test, and do the calculations using R. 
+
+```{r}
+# Your code here
+```
+
+c.) Suppose you were more interested in how students do on the first exam compared to the `Final`. Run a hypothesis test to see if student scores improved on the final compared to the first exam. 
+
+```{r}
+# Your code here
+```
 
 # Paired T Test
 
-Rerun the two sample T test above, but this time do a paired T test. Note any differences in the results. What do you conclude about student performance on the two exams?
+Rerun the two sample t test that compares Exam 1 to Exam 2, but this time do a paired t test. Note any differences in the results. What do you conclude about student performance on the two exams? Why does it make sense to do a paired t test in this case?
+
+```{r}
+# Your code here
+```
 
