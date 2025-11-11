@@ -6,6 +6,8 @@ editor_options:
   chunk_output_type: console
 ---
 
+# *Part 1*
+
 # Introduction to Type I and Type II Errors
 
 In hypothesis testing, we need to decide whether we are going to reject the null hypothesis, or fail to reject the null hypothesis. We sometimes, however, make the wrong decision. A **Type I** error occurs when we reject the null hypothesis, but the null hypothesis is actually true. A **Type II** error occurs when we fail to reject the null hypothesis, but the null hypothesis is actually false. The probability that we make a Type I error is also known as the significance level. Typically, we set our significance level to be 0.05 in hypothesis testing.
@@ -157,4 +159,68 @@ e) Calculate the p-value of the test, and state your conclusion.
 # Your code here
 ```
 
+
+# *Part 2*  Permutations tests for one mean and diffrence between two means:
+
+## Test for the diffrence between two means with permuations:
+
+
+The same local statistics instructor believes that students perform the same on the first exam (`Exam1`) and the second exam (`Exam2`). Again, the data is available in the `StatsGrades` data set from the `Lock5Data` library. 
+
+1.) Create a null distribution and create its histogram.
+
+```{r}
+# Your code here
+```
+
+
+2.) Calculate the p-value
+
+```{r}
+# Your code here
+```
+
+
+
+## Test for one mean:
+
+**(Let go back to he the question of testing one mean)**.
+
+According to a local statistics instructor, the average score on his first exam of the semester (`Exam1`) is historically around 80%. The data is available in the `StatsGrades` data set from the `Lock5Data` library. let Create a bootstrap distribution with a mean of the hypothesised value
+
+1.) Calculate the mean of the data.
+
+
+```{r}
+# Your code here
+```
+
+
+2.) Subtract this mean from the data.
+
+
+```{r}
+# Your code here
+```
+
+
+3.) Add the hypothesized value to the data.
+
+```{r}
+# Your code here
+```
+
+
+4.)Now create a bootstrap distribution with the last modified data you have created in the previous step.
+
+
+```{r}
+# Your code here
+```
+
+5.) Calculate the p-value
+
+```{r}
+# Your code here
+```
 
