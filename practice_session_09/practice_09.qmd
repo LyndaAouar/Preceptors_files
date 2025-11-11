@@ -10,7 +10,7 @@ editor_options:
 
 In hypothesis testing, we need to decide whether we are going to reject the null hypothesis, or fail to reject the null hypothesis. We sometimes, however, make the wrong decision. A **Type I** error occurs when we reject the null hypothesis, but the null hypothesis is actually true. A **Type II** error occurs when we fail to reject the null hypothesis, but the null hypothesis is actually false. The probability that we make a Type I error is also known as the significance level. Typically, we set our significance level to be 0.05 in hypothesis testing.
 
-# Type I, Type II, or Neither?
+# Question 1: Type I, Type II, or Neither?
 
 For each of the following statements, decide whether a Type I or a Type II Error was made. If no error was made, indicate that no error was committed.
 
@@ -37,17 +37,17 @@ c) A test for an infectious disease gives a positive result if a patient is beli
 
 In the context of this question, which error (Type I or Type II) would be more problematic? If you could make one of these errors less likely to occur, which one would it be, and why?
 
-# Introduction to the One Sample T Test
+# Introduction to the One Sample t-test
 
-When our data is not normally distributed, or we cannot reliably use the normal distribution, we can still perform hypothesis testing using the t distribution. Let $n$ be the sample size, $\bar{x}$ be the sample mean, and $s$ be the sample standard deviation. The formula for the estimated standard error (SE) of the sample mean, and the t statistic are below. 
+When our population standard deviation sigma is unknown, we can do inference on population means mu using a t-distribution. Let $n$ be the sample size, $\bar{x}$ be the sample mean, and $s$ be the sample standard deviation. The formula for the estimated standard error (SE) of the sample mean, and the t statistic are below. 
 
 $$\text{SE} = \frac{s}{\sqrt{n}}$$
 
 $$\text{t Statistic} = \frac{\bar{x} - \mu_0}{\frac{s}{\sqrt{n}}} \sim t(df = n - 1)$$
 
-Where $df = n - 1$ is the degrees of freedom of the test. This formula is for the one sample t test. 
+Where $df = n - 1$ is the degrees of freedom of the test. This formula is for the one sample t-test. 
 
-# One Sample T Test
+# Question 2: One Sample t-test
 
 According to a local statistics instructor, the average score on his first exam of the semester (`Exam1`) is historically around 80%. The data is available in the `StatsGrades` data set from the `Lock5Data` library. 
 
@@ -57,19 +57,29 @@ a) First visualize the data using a boxplot and a histogram. Do you see any outl
 # Your code here
 ```
 
-b) Run a one sample t test to see if this year's students performed significantly better than the historic average. Use the formulas learned in class to perform the test, and do the calculations using R. What do you conclude?
+Run a one sample t-test to see if this year's students performed significantly better than the historic average.
+
+b) State the null and alternative hypotheses using symbols
+
+c) Calculate the t-statistic
 
 ```{r}
 # Your code here
 ```
 
-c) Add a red vertical line to your histogram at the sample mean estimate. Does this visualization help confirm your conclusion from the hypothesis test?
+d) Calculate the p-value of the test, and state your conclusion.
 
 ```{r}
 # Your code here
 ```
 
-# Introduction to the Two Sample T Test
+e) Use the `dt()` function and `plot()` to visualize the t-distribution. The degrees of freedom will be the same as for the test. Add a vertical red line to the plot at the observed sample mean.
+
+```{r}
+# Your code here
+```
+
+# Introduction to the Two Sample t-test
 
 Similar to the one sample case, we can compute a standard error and t-statistic to perform a two sample test. Suppose we have two samples, sample 1 and sample 2. To conduct the test, we need the following information:
 
@@ -85,7 +95,7 @@ $$\text{SE} = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$$
 $$\text{t Statistic} = \frac{\bar{x}_2 - \bar{x}_1}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}} \sim t(df = \min\{n_1 - 1, n_2 - 1\})$$
 Where $df = \min\{n_1 - 1, n_2 - 1\}$ is the degrees of freedom for the test.
 
-# Two Sample T Test
+# Question 3: Two Sample t-test
 
 The same local statistics instructor believes that students perform the same on the first exam (`Exam1`) and the second exam (`Exam2`). Again, the data is available in the `StatsGrades` data set from the `Lock5Data` library. 
 
@@ -95,23 +105,56 @@ a) First visualize both sets of exam scores using side-by-side boxplots. Comment
 # Your code here
 ```
 
-b) Run a two sample t test to see if this year's students performed differently on the two exams. Use the formulas learned in class to perform the test, and do the calculations using R. 
+Run a two sample t-test to see if this year's students performed differently on the two exams. Use the formulas learned in class to perform the test, and do the calculations using R. 
+
+b) State the null and alternative hypotheses using symbols
+
+c) Calculate the t-statistic
 
 ```{r}
 # Your code here
 ```
 
-c) Suppose you were more interested in how students do on the first exam compared to the `Final`. Run a hypothesis test to see if student scores improved on the final compared to the first exam. 
+d) Calculate the p-value of the test, and state your conclusion.
 
 ```{r}
 # Your code here
 ```
 
-# Paired T Test
-
-Rerun the two sample t test that compares Exam 1 to Exam 2, but this time do a paired t test. Note any differences in the results. What do you conclude about student performance on the two exams? Why does it make sense to do a paired t test in this case?
+e) Suppose you were more interested in how students do on the first exam compared to the `Final`. Run a hypothesis test to see if student scores improved on the final compared to the first exam. 
 
 ```{r}
 # Your code here
 ```
+
+# Question 4: Paired t-test
+
+Rerun the two sample t-test that compares Exam 1 to Exam 2, but this time do a paired t-test. Note any differences in the results. What do you conclude about student performance on the two exams? Why does it make sense to do a paired t-test in this case?
+
+a) State the null and alternative hypotheses using symbols.
+
+b) Calculate the difference vector by subtracting the Exam 1 scores from the Exam 2 scores.
+
+```{r}
+# Your code here
+```
+
+c) Calculate the mean of the difference vector, save this as `D_bar`.
+
+```{r}
+# Your code here
+```
+
+d) Calculate the t-statistic
+
+```{r}
+
+```
+
+e) Calculate the p-value of the test, and state your conclusion.
+
+```{r}
+# Your code here
+```
+
 

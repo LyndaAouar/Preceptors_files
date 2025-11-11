@@ -7,7 +7,7 @@ editor_options:
 ---
 
 
-# Type I, Type II, or Neither?
+# Question 1: Type I, Type II, or Neither?
 
 a) Type I Error
 
@@ -22,7 +22,7 @@ c)
 
 **If the disease is dangerous, then a Type II error (saying a patient doesn't have the disease when they really do) can be a big issue. We would want to make the Type II error lower. However, this may make the Type I error larger as a result.**
 
-# Single Sample T Test
+# Question 2: Single Sample T Test
 
 a)
 
@@ -40,6 +40,8 @@ b)
 * $H_0: \mu = 80$
 * $H_A: \mu \neq 80$
 
+c)
+
 ```{r}
 n1 = length(StatGrades$Exam1) # get sample size (n = 50)
 
@@ -51,6 +53,8 @@ T_stat_exam1 = (mean_exam1 - 80) / se_exam1
 T_stat_exam1
 ```
 
+d)
+
 ```{r}
 # df = 50 - 1 = 49
 pt(T_stat_exam1, df = n1 - 1, lower.tail = F)
@@ -58,7 +62,8 @@ pt(T_stat_exam1, df = n1 - 1, lower.tail = F)
 
 **Since our p-value is greater than 0.05, we will fail to reject the null hypothesis. We therefore do not have evidence that this year's exam scores are significantly higher than 80.**
 
-c) 
+e)
+
 ```{r}
 par(mfrow = c(1, 1))
 hist(StatGrades$Exam1, main = "", xlab = "Exam 1 Scores")
@@ -67,7 +72,7 @@ abline(v = mean_exam1, col = "red")
 
 **It seems that the sample mean wasn't very far from the null value of 80, which supports the lack of significance in our test.**
 
-# Two Sample T Test
+# Question 3: Two Sample T Test
 
 a)
 
@@ -85,6 +90,8 @@ b)
 * $H_0: \mu_1 = \mu_2$
 * $H_A: \mu_1 \neq \mu_2$
 
+c)
+
 ```{r}
 n2 = length(StatGrades$Exam2) # get sample size (n = 50)
 
@@ -97,6 +104,8 @@ T_stat_two_means = (mean_exam2 - mean_exam1) / se_two_means
 T_stat_two_means
 ```
 
+d) 
+
 **Since we are doing a two-sided test, we need to multiply the p-value by 2.**
 
 ```{r}
@@ -105,7 +114,7 @@ T_stat_two_means
 
 **Since our p-value is greater than 0.05, we will fail to reject the null hypothesis. We therefore do not have evidence that this year's students performed differently on the two exams.**
 
-c)
+e)
 
 * $H_0: \mu_1 = \mu_{final}$
 * $H_A: \mu_1 < \mu_{final}$
@@ -130,22 +139,37 @@ pt(T_stat_one_final, df = 50 - 1, lower.tail = F)
 
 **Since our p-value is less than 0.05, we will reject the null hypothesis. We therefore have evidence that student scores improved on the final compared to the first exam.**
 
-# Paired T Test
+# Question 4: Paired T Test
+
+a)
 
 **Let $D$ be the true difference between the exam 1 and exam 2 scores. We will perform the following two-sided test:**
 
 * $H_0: D = 0$
 * $H_A: D \neq 0$
 
+b)
+
 ```{r}
 diff_exams = StatGrades$Exam2 - StatGrades$Exam1
+```
+
+c)
+
+```{r}
 n_diff = length(diff_exams)
 
 mean_diff = mean(diff_exams)
 se_diff = sd(diff_exams) / sqrt(n_diff)
+```
 
+d)
+
+```{r}
 T_stat_diff = mean_diff / se_diff
 ```
+
+e)
 
 ```{r}
 2 * pt(T_stat_diff, df = n_diff - 1, lower.tail = F)
