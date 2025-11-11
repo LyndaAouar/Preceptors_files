@@ -7,24 +7,24 @@ editor_options:
 ---
 
 
-# Type 1, Type 2, or Neither?
+# Type I, Type II, or Neither?
 
-a.) Type 1 Error
+a) Type I Error
 
-b.) No error
+b) No error
 
-c.) 
+c) 
 
 * No error
-* Type 1 Error
-* Type 2 Error
+* Type I Error
+* Type II Error
 * No error
 
-**If the disease is dangerous, then a Type 2 error (saying a patient doesn't have the disease when they really do) can be a big issue. We would want to make the Type 2 error lower. However, this may make the Type 1 error larger as a result.**
+**If the disease is dangerous, then a Type II error (saying a patient doesn't have the disease when they really do) can be a big issue. We would want to make the Type II error lower. However, this may make the Type I error larger as a result.**
 
 # Single Sample T Test
 
-a.)
+a)
 
 ```{r}
 library(Lock5Data)
@@ -35,7 +35,7 @@ hist(StatGrades$Exam1, main = "", xlab = "Exam 1 Scores")
 
 **There appears to be one outlier. We might want to investigate this score further.**
 
-b.)
+b)
 
 * $H_0: \mu = 80$
 * $H_A: \mu \neq 80$
@@ -58,7 +58,7 @@ pt(T_stat_exam1, df = n1 - 1, lower.tail = F)
 
 **Since our p-value is greater than 0.05, we will fail to reject the null hypothesis. We therefore do not have evidence that this year's exam scores are significantly higher than 80.**
 
-c.) 
+c) 
 ```{r}
 par(mfrow = c(1, 1))
 hist(StatGrades$Exam1, main = "", xlab = "Exam 1 Scores")
@@ -69,7 +69,7 @@ abline(v = mean_exam1, col = "red")
 
 # Two Sample T Test
 
-a.)
+a)
 
 ```{r}
 boxplot(StatGrades$Exam1, StatGrades$Exam2,
@@ -80,7 +80,7 @@ boxplot(StatGrades$Exam1, StatGrades$Exam2,
 
 **The median scores appear to be similar for both exams. Exam 1 scores appear to have more variability than exam 2 scores. There are two outliers in the exam 2 scores.**
 
-b.)
+b)
 
 * $H_0: \mu_1 = \mu_2$
 * $H_A: \mu_1 \neq \mu_2$
@@ -105,7 +105,7 @@ T_stat_two_means
 
 **Since our p-value is greater than 0.05, we will fail to reject the null hypothesis. We therefore do not have evidence that this year's students performed differently on the two exams.**
 
-c.)
+c)
 
 * $H_0: \mu_1 = \mu_{final}$
 * $H_A: \mu_1 < \mu_{final}$

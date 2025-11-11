@@ -6,36 +6,36 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Introduction to Type 1 and Type 2 Errors
+# Introduction to Type I and Type II Errors
 
-In hypothesis testing, we need to decide whether we are going to reject the null hypothesis, or fail to reject the null hypothesis. We sometimes, however, make the wrong decision. A **Type 1** error occurs when we reject the null hypothesis, but the null hypothesis is actually true. A **Type 2** error occurs when we fail to reject the null hypothesis, but the null hypothesis is actually false. The probability that we make a Type 1 error is also known as the significance level. Typically, we set our significance level to be 0.05 in hypothesis testing.
+In hypothesis testing, we need to decide whether we are going to reject the null hypothesis, or fail to reject the null hypothesis. We sometimes, however, make the wrong decision. A **Type I** error occurs when we reject the null hypothesis, but the null hypothesis is actually true. A **Type II** error occurs when we fail to reject the null hypothesis, but the null hypothesis is actually false. The probability that we make a Type I error is also known as the significance level. Typically, we set our significance level to be 0.05 in hypothesis testing.
 
-# Type 1, Type 2, or Neither?
+# Type I, Type II, or Neither?
 
-For each of the following statements, decide whether a Type 1 or a Type 2 Error was made. If no error was made, indicate that no error was committed.
+For each of the following statements, decide whether a Type I or a Type II Error was made. If no error was made, indicate that no error was committed.
 
-a.) Shiba ran a hypothesis test with the following hypotheses:
+a) Shiba ran a hypothesis test with the following hypotheses:
 
 * $H_0: \mu = 50$
 * $H_A: \mu > 50$
 
 She rejected the null hypothesis; the true mean is actually 50.
 
-b.) Joe wanted to test if the mean bag weight of Lays Potato chips is less than 5 oz.
+b) Joe wanted to test if the mean bag weight of Lays Potato chips is less than 5 oz.
 
 * $H_0: \mu = 5$
 * $H_A: \mu < 5$
 
 He failed to reject the null; the true mean is actually 5 oz.
 
-c.) A test for an infectious disease gives a positive result if a patient is believed to have the disease, and a negative result otherwise. However, the test can sometimes be wrong. Label the following statements as a Type 1 error, Type 2 error, or neither. Assume the null hypothesis is that the patient doesn't have the disease.
+c) A test for an infectious disease gives a positive result if a patient is believed to have the disease, and a negative result otherwise. However, the test can sometimes be wrong. Label the following statements as a Type I error, Type II error, or neither. Assume the null hypothesis is that the patient doesn't have the disease.
 
 * A positive test result; the patient actually has the disease 
 * A positive test result; the patient doesn't actually have the disease
 * A negative test result; the patient actually has the disease
 * A negative test result; the patient doesn't actually have the disease
 
-In the context of this question, which error (Type 1 or Type 2) would be more problematic? If you could make one of these errors less likely to occur, which one would it be, and why?
+In the context of this question, which error (Type I or Type II) would be more problematic? If you could make one of these errors less likely to occur, which one would it be, and why?
 
 # Introduction to the One Sample T Test
 
@@ -51,19 +51,19 @@ Where $df = n - 1$ is the degrees of freedom of the test. This formula is for th
 
 According to a local statistics instructor, the average score on his first exam of the semester (`Exam1`) is historically around 80%. The data is available in the `StatsGrades` data set from the `Lock5Data` library. 
 
-a.) First visualize the data using a boxplot and a histogram. Do you see any outliers?
+a) First visualize the data using a boxplot and a histogram. Do you see any outliers?
 
 ```{r}
 # Your code here
 ```
 
-b.) Run a one sample t test to see if this year's students performed significantly better than the historic average. Use the formulas learned in class to perform the test, and do the calculations using R. What do you conclude?
+b) Run a one sample t test to see if this year's students performed significantly better than the historic average. Use the formulas learned in class to perform the test, and do the calculations using R. What do you conclude?
 
 ```{r}
 # Your code here
 ```
 
-c.) Add a red vertical line to your histogram at the sample mean estimate. Does this visualization help confirm your conclusion from the hypothesis test?
+c) Add a red vertical line to your histogram at the sample mean estimate. Does this visualization help confirm your conclusion from the hypothesis test?
 
 ```{r}
 # Your code here
@@ -89,19 +89,19 @@ Where $df = \min\{n_1 - 1, n_2 - 1\}$ is the degrees of freedom for the test.
 
 The same local statistics instructor believes that students perform the same on the first exam (`Exam1`) and the second exam (`Exam2`). Again, the data is available in the `StatsGrades` data set from the `Lock5Data` library. 
 
-a.) First visualize both sets of exam scores using side-by-side boxplots. Comment on what you notice. 
+a) First visualize both sets of exam scores using side-by-side boxplots. Comment on what you notice. 
 
 ```{r}
 # Your code here
 ```
 
-b.) Run a two sample t test to see if this year's students performed differently on the two exams. Use the formulas learned in class to perform the test, and do the calculations using R. 
+b) Run a two sample t test to see if this year's students performed differently on the two exams. Use the formulas learned in class to perform the test, and do the calculations using R. 
 
 ```{r}
 # Your code here
 ```
 
-c.) Suppose you were more interested in how students do on the first exam compared to the `Final`. Run a hypothesis test to see if student scores improved on the final compared to the first exam. 
+c) Suppose you were more interested in how students do on the first exam compared to the `Final`. Run a hypothesis test to see if student scores improved on the final compared to the first exam. 
 
 ```{r}
 # Your code here
