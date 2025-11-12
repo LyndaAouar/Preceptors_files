@@ -1,1 +1,31 @@
+---
+title: "Practice Session 10 Answers"
+format: pdf
+editor: source
+editor_options: 
+  chunk_output_type: console
+---
 
+# *Part 1*
+
+# ANOVA
+
+
+## Question 1: 
+## Question 2: 
+
+
+$\\$
+# *Part 2*
+
+# CHI_square
+
+## Question 3: 
+## Question៤: 
+
+
+$\\$
+# *Part 3*
+
+# Inference for regression
+## Question 5: 
