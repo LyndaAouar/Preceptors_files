@@ -14,6 +14,8 @@ editor_options:
 ## Question 1: 
 ## Question 2: 
 
+
+$\\$
 # *Part 2*
 
 # CHI_square
@@ -21,6 +23,8 @@ editor_options:
 ## Question 3: 
 ## Question៤: 
 
+
+$\\$
 # *Part 3*
 
 # Inference for regression
