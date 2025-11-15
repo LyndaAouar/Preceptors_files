@@ -6,26 +6,414 @@ editor_options:
   chunk_output_type: console
 ---
 
-# *Part 1*
 
-# ANOVA
+---
+title: "practice 10"
+format: pdf
+editor: visual
+---
+
+#  * Part 1 *
+
+# **ANOVA to compare means**
+
+## Intro: 
+
+## Question 1: ANOVA- Hanging out with friends
+
+A survey given to a sample of high school seniors in Pennsylvania in the data `PASeniors`. Two of the variables in the survey are `HangHours`, the number of hours per week spent hanging out with friends, and `SchoolPressure`, the amount of pressure felt due to schoolwork (None, Very little, Some, or A lot). 
+
+We wish to test whether the amount of school pressure felt by students is related to the mean time hanging out with friends. 
+
+The output for an ANOVA test is shown below, along with some summary statistics.
 
 
-## Question 1: 
-## Question 2: 
+\begin{tabular}{|l|r|r|r|r|r|}
+\hline \multicolumn{6}{|l|}{ Analysis of Variance } \\
+\hline Source & DF & Adj SS & Adj MS & F-Value & P-Value \\
+\hline Pressure & 3 & 1563 & 521.2 & 4.75 & 0.003 \\
+\hline Error & 443 & 48557 & 109.6 & & \\
+\hline Total & 446 & 50121 & & & \\
+\hline
+\end{tabular}
 
 
-$\\$
-# *Part 2*
+\begin{tabular}{|l|r|r|r|}
+\hline Pressure & N & Mean & StDev \\
+\hline None & $\mathbf{1 6}$ & $\mathbf{1 2 . 1 9}$ & $\mathbf{8 . 5 0}$ \\
+\hline Very little & $\mathbf{5 5}$ & $\mathbf{1 5 . 9 1}$ & $\mathbf{1 1 . 3 3}$ \\
+\hline Some & $\mathbf{1 9 7}$ & $\mathbf{1 0 . 9 7 7}$ & $\mathbf{1 1 . 6 0 1}$ \\
+\hline A lot & $\mathbf{1 7 9}$ & $\mathbf{9 . 8 6 6}$ & $\mathbf{8 . 9 1 9}$ \\
+\hline
+\end{tabular}
 
-# CHI_square
 
-## Question 3: 
-## Question៤: 
+1.) What is the explanatory variable? Is it categorical or quantitative? What is the response variable? Is it categorical or quantitative?
+
+2.) Which `SchoolPressure` group reports the highest mean time hanging out with friends? Which group reports the lowest mean time?
+
+3.)  How many students were included in the analysis?
+
+4.) What is the hypothesis? What is the F-statistic? What is the p-value?
+
+5.) State the conclusion of the test in context.
 
 
-$\\$
-# *Part 3*
+**Answers:**
 
-# Inference for regression
-## Question 5: 
+1.) The explanatory variable is amount of pressure felt from schoolwork, which is categorical. The response variable is number of hours per week hanging out with friends, which is quantitative.
+
+2). The highest mean ( 15.91 hours per week hanging with friends) is for the group feeling 'Very little' pressure from schoolwork. The lowest mean ( 9.866 hours per week hanging out with friends) is for the group feeling 'A lot' of pressure from schoolwork.
+
+3.) The total degrees of freedom is $n-1=446$ so the number of students included in the analysis is $n=447$.
+
+
+4.)
+
+$\begin{array}{ll}H_0: & \mu_1=\mu_2=\mu_3=\mu_4 \\ H_a: & \text { Some } \mu_i \neq \mu_j\end{array}$
+
+We see in the output that the F-statistic is 4.75 and the p-value is 0.003 .
+
+5.) The p -value is smaller than any reasonable significance level, so we reject $H_{\mathrm{O}}$.
+We have evidence of a difference in mean number of hours a week spent hanging out with friends depending on how much stress students feel from schoolwork.
+
+
+## Question 2: ANOVA with R function `aov()`
+
+Using the previous data `PASeniors`, and the two variables  `HangHours` and  `SchoolPressure`. 
+
+1.) Find summary statistics for the groups of `SchoolPressure`. Using function `mosaic::favstats( Response ~ grouping, data= )`. Which group has the largest mean and sd of the  `HangHours` ?
+
+2.) Use the function `aov(Response ~ grouping, data= )` to find the summary statistics for the ANOVA test. 
+Indicate the F-stat and the p-value
+
+**Answers :**
+
+```{r}
+library(SDS1000)
+library(Lock5Data)
+data(PASeniors)
+
+boxplot(HangHours ~ SchoolPressure, data= PASeniors)
+
+mosaic::favstats(HangHours ~ SchoolPressure, data= PASeniors)
+
+anova_model<- aov( HangHours ~ SchoolPressure, data= PASeniors)
+summary(anova_model)
+```
+2.) Indicate the F-stat = 3.85 and the p-value= 0.00435. 
+
+
+## Question 3: ANOVA with NULL-Distribution 
+
+Using the previous data `PASeniors`, and the two variables  `HangHours` and  `SchoolPressure`. 
+
+1.) Find the F-test-statistic using the function ` get_F_stat()`. Compare it to Q2
+
+2.) Create the null distribution and use `abline` to designate the F-stat. 
+
+**Answers:**
+
+1.) Find the F-test-statistic using the function ` get_F_stat()`. Compare it to Q2
+The F-stat is 3.85 and it is the same as tghe previous Q2
+
+```{r}
+
+F_stat <- get_F_stat(PASeniors$HangHours, PASeniors$SchoolPressure)
+
+F_stat
+
+
+```
+
+2.) Create the null distribution and use `abline` to designate the F-stat. 
+
+```{r}
+null_dist <- do_it(10000) * {
+shuffled_SchoolPressure <- shuffle(PASeniors$SchoolPressure)
+get_F_stat(PASeniors$HangHours, shuffled_SchoolPressure)
+}
+
+# visualize the null distribution 
+hist(null_dist, breaks = 200)
+abline(v = F_stat, col = "red")
+
+```
+
+# * Part 2 *
+
+# **Chi-Square Tests for Categorical Variables **
+
+## Into: 
+
+$\chi^2=\sum \frac{(\text { Observed }- \text { Expected })^2}{\text { Expected }}$
+
+
+## Question 4 : Ch^2 test- What Type of Ice Cream?
+
+Sixty people were asked whether they preferred vanilla, chocolate, or strawberry ice cream and the results are shown in the table below. [Note: You may also choose to ask your class which they prefer, and use that data instead.] Perform a chi-square goodness-of-fit test to determine whether the flavors are equally popular.
+
+\begin{tabular}{|l|c|}
+\hline Flavor & Frequency \\
+\hline Vanilla & 28 \\
+Chocolate & 23 \\
+Strawberry & 9 \\
+\hline TOTAL & 60 \\
+\hline
+\end{tabular}
+
+
+
+1.) Write the hypothesis of this Chi-Square test.Do the hypothesized proportions have the same value? 
+
+
+2.) Find the df ( degrees of freedom ).
+
+3.) Calculate the Chi-Square test statistic using the formula. 
+
+* a) Find the expected values for each category.
+
+* b) Find the contribution of each category to the Chi-Square test statistic.
+
+* c) Calculate now the Chi-Square test statistic.
+
+
+4.) Find the p-value using `pchisq()` function. *hint*: find the function in help tab. 
+
+
+5.) Make judgment about this test.
+
+
+**Answers**:
+
+
+1.) The null hypothesis is that the flavors are equally likely to be preferred, while the alternative hypothesis is that the flavors are not equally likely to be selected.
+
+In symbols:
+
+$H_0: p_v= p_c=p_s=1 / 3$ and 
+
+$H_a$ : Some $p_i \neq 1 / 3$.
+
+
+2.) Find the df ( degrees of freedom ).
+
+There are three categories so we have $d f=2$. Using a chi-square distribution with $d f=2$,
+
+
+3.) Calculate the Chi-Square test statistic using the formula. 
+
+* a) Find the expected values for each category.
+The expected counts:
+$60 \times 1 / 3$ = 20 in each category.
+
+
+* b) Find the contribution of each category to the Chi-Square test statistic.
+
+contribution to the chi-square statistic, $(O-E)^2 / E$, are shown as new columns in the table below.
+
+\begin{tabular}{|l|c|c|c|}
+\hline Flavor & Observed & Expected & Contribution \\
+\hline Vanilla & 28 & 20 & 3.2 \\
+Chocolate & 23 & 20 & 0.45 \\
+Strawberry & 9 & 20 & 6.05 \\
+\hline TOTAL & 60 & 60 & 9.7 \\
+\hline
+\end{tabular}
+
+
+* c) Calculate now the Chi-Square test statistic.
+We see that the chi-square statistic is 9.7
+
+$\chi^2-test-statisti =\sum \frac{(\text { observed }- \text { expected })^2}{\text { expected }}$
+
+
+4.) Find the p-value using `pchisq()` function. *hint*: find the function in help tab. Calculate now the Chi-Square test statistic.
+we see that the p -value is 0.0078 
+
+```{r}
+
+pchisq( 9.7, df= 2, lower.tail= F)
+
+#0.007828
+
+```
+
+5.) Make judgment about this test.
+
+So we find strong evidence that the flavors are not equally preferred.Note that the strongest contributor to the chi-square statistic is the count for strawberry, which is below the expected count.
+
+### Question 5: Chi^2 test- Genetic Variation
+
+Genetic Variation
+Studies in genetics often involve chi-square tests. For one gene, we expect $25 \%$ of people to have the variant AA, $25 \%$ to have the variant BB , and $50 \%$ to have the variant AB . Observed counts of the three variants in one sample are shown. Do these counts provide evidence that the stated proportions are not right?
+
+
+\begin{tabular}{|c|c|}
+\hline Variant & Frequency \\
+\hline AA & 142 \\
+BB & 121 \\
+AB & 307 \\
+\hline Total & 570 \\
+\hline
+\end{tabular}
+
+
+1.) Write the hypothesis of this Chi-Square test.
+
+2.) Find the df ( degrees of freedom )
+
+3.) Calculate the Chi-Square test statistic using the formula. 
+
+*3.a) Find the expected values for each category
+
+*3.b) Find the contribution of each category to the Ch-Square test statistic.
+
+*3.c) Calculate now the Chi-Square test statistic
+
+
+4.) Find the p-value using `pchisq()` function. *hint*: find the function in help tab. 
+
+
+5.) Make judgment about this test.
+
+
+
+**Answers**
+
+1.)
+The null hypothesis is that the proportions of $p_{A A}=0.25, p_{B B}=0.25$, and $p_{A B}=0.50$ are correct, while the alternative hypothesis is at least one of the null proportions is not correct.
+
+
+2.) 
+There are three categories so we have $d f=2$. Using a chi-square distribution with
+$df=2$.
+
+3.) 
+
+ *3.a) The expected counts are : 
+ 
+ For AA: 570 $\times 25 \%$ = 142.5
+ 
+ For BB: 570 $\times 25 \%$ = 142.5 
+ 
+ For AB : 570 $\times 50 \%$ = 285
+ 
+ * 3.b) Find the contribution of each Category to the Chi^2 test statistic using $(O-E)^2 / E$
+ 
+\begin{tabular}{|c|c|c|c|}
+\hline Variant & Frequency & Observed & Contribution \\
+\hline AA & 142 & 142.5 & 0.00 \\
+BB & 121 & 142.5 & 3.24 \\
+AB & 307 & 285 & 1.70 \\
+\hline Total & 570 & & 4.94 \\
+\hline
+\end{tabular}
+
+
+* 3.c)  We see that the chi-square test statistic is 4.94 
+
+
+4.) 
+
+The  p -value is 0.0845 . 
+
+```{r}
+pchisq( 4.94, df= 2, lower.tail= F)
+
+#0.08458486
+
+```
+
+
+5.) 
+At a $5 \%$ level, we do not reject $H_0$. These data do not contradict the hypothesized proportions for these three gene variants.
+
+
+
+
+### Question 4: Genetic Variation
+
+Genetic Variation
+Studies in genetics often involve chi-square tests. For one gene, we expect $25 \%$ of people to have the variant AA, $25 \%$ to have the variant BB , and $50 \%$ to have the variant AB . Observed counts of the three variants in one sample are shown. Do these counts provide evidence that the stated proportions are not right?
+
+
+\begin{tabular}{|c|c|}
+\hline Variant & Frequency \\
+\hline AA & 142 \\
+BB & 121 \\
+AB & 307 \\
+\hline Total & 570 \\
+\hline
+\end{tabular}
+
+
+1.) Write the hypothesis of this Chi-Square test.
+
+2.) Find the df ( degrees of freedom )
+
+3.) Calculate the Chi-Square test statistic using the formula. 
+
+* a) Find the expected values for each category
+
+* b) Find the contribution of each category to the Ch-Square test statistic.
+
+* c) Calculate now the Chi-Square test statistic
+
+
+4.) Find the p-value using `pchisq()` function. *hint*: find the function in help tab. 
+
+
+5.) Make judgment about this test.
+
+
+
+**Answers**
+
+1.)
+The null hypothesis is that the proportions of $p_{A A}=0.25, p_{B B}=0.25$, and $p_{A B}=0.50$ are correct, while the alternative hypothesis is at least one of the null proportions is not correct.
+
+
+2.) 
+There are three categories so we have $d f=2$. Using a chi-square distribution with
+$df=2$.
+
+3.) 
+* a) The expected counts are : 
+ 
+ For AA: 570 $\times 25 \%$ = 142.5
+ 
+ For BB: 570 $\times 25 \%$ = 142.5 
+ 
+ For AB : 570 $\times 50 \%$ = 285
+ 
+* b) Find the contribution of each Category to the Chi^2 test statistic using $(O-E)^2 / E$
+ 
+\begin{tabular}{|c|c|c|c|}
+\hline Variant & Frequency & Observed & Contribution \\
+\hline AA & 142 & 142.5 & 0.00 \\
+BB & 121 & 142.5 & 3.24 \\
+AB & 307 & 285 & 1.70 \\
+\hline Total & 570 & & 4.94 \\
+\hline
+\end{tabular}
+
+
+* c)  We see that the chi-square test statistic is 4.94 
+
+
+4.) 
+
+The  p -value is 0.0845 . 
+
+```{r}
+pchisq( 4.94, df= 2, lower.tail= F)
+
+#0.08458486
+
+```
+
+
+5.) 
+At a $5 \%$ level, we do not reject $H_0$. These data do not contradict the hypothesized proportions for these three gene variants.
+
