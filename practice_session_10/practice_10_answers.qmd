@@ -6,18 +6,9 @@ editor_options:
   chunk_output_type: console
 ---
 
-
----
-title: "practice 10"
-format: pdf
-editor: visual
----
-
 #  * Part 1 *
 
 # **ANOVA to compare means**
-
-## Intro: 
 
 ## Question 1: ANOVA- Hanging out with friends
 
@@ -416,4 +407,55 @@ pchisq( 4.94, df= 2, lower.tail= F)
 
 5.) 
 At a $5 \%$ level, we do not reject $H_0$. These data do not contradict the hypothesized proportions for these three gene variants.
+
+# *Part 3*
+# Inference for Linear Regression
+
+Hypothesis testing can be done for more than sample means and proportions. We can also test hypotheses relating to regression parameters, like $\beta_1$, the slope, and $\beta_0$, the y-intercept. The hypotheses typically test whether the parameter is greater than zero, less than zero, or not equal to zero.
+
+# Question 5: Hypothesis Testing for Regression Slope $\beta_1$
+
+Do triples lead to more wins? A "triple" in baseman occurs when a batter hits a ball in play, and is able to advance three bases (i.e., make it to third base). However, triples have become less common due to improvements in defensive positioning and outfielder speed. Perform a hypothesis test to see if hitting more triples is linearly associated with earning more wins. The data is available in the `BaseballHits2014` data set from the `Lock5Data` library.
+
+a) First fit the regression model with `Wins` as the outcome, and `Triples` as the predictor. Extract the slope coefficient by using the `coef()` function, and selecting the second value (e.g., `coef(my_model)[2]`).
+
+```{r}
+library(Lock5Data)
+library(SDS1000)
+
+triple_mod = lm(data = BaseballHits2014, Wins ~ Triples)
+obs_beta1 = coef(triple_mod)[2]
+obs_beta1
+```
+
+b) State the null and alternative hypotheses using symbols
+
+* $H_0: \beta_1 = 0$
+* $H_A: \beta_1 > 0$
+
+c) Create a null distribution by using the `do_it` function. The approach you will want to take is to fit a regression model inside the `do_it` call (maybe call it `curr_model`), and you will use `Wins` as the outcome, and a shuffled `Triples` as the predictor. You can shuffle the `Triples` variable using the `shuffle()` function. Extract the slope coefficient after fitting each model.
+
+```{r}
+null_dist_triples = do_it(10000) * {
+  curr_mod = lm(data = BaseballHits2014, Wins ~ shuffle(Triples))
+  coef(curr_mod)[2]
+}
+```
+
+d) Plot a histogram of your null distribution, and add a red vertical line at the observed slope
+
+```{r}
+hist(null_dist_triples, main = "Null Distribution of Slope")
+abline(v = obs_beta1, col = "red")
+```
+
+d) Calculate the p-value by seeing the proportion of null values that are more extreme than the one you observed.
+
+```{r}
+pnull(obs_beta1, null_dist_triples, lower.tail = F)
+```
+
+e) State your conclusion.
+
+**Since our p-value is greater than 0.05, we will fail to reject the null hypothesis. We therefore do not have evidence that hitting more triples is linearly associated with earning more wins.**
 
