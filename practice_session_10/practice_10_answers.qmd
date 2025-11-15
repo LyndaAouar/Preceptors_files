@@ -58,10 +58,7 @@ The output for an ANOVA test is shown below, along with some summary statistics.
 
 3.) The total degrees of freedom is $n-1=446$ so the number of students included in the analysis is $n=447$.
 
-
-4.)
-
-$\begin{array}{ll}H_0: & \mu_1=\mu_2=\mu_3=\mu_4 \\ H_a: & \text { Some } \mu_i \neq \mu_j\end{array}$
+4.) $\begin{array}{ll}H_0: & \mu_1=\mu_2=\mu_3=\mu_4 \\ H_a: & \text { Some } \mu_i \neq \mu_j\end{array}$
 
 We see in the output that the F-statistic is 4.75 and the p-value is 0.003 .
 
@@ -109,11 +106,8 @@ Using the previous data `PASeniors`, and the two variables  `HangHours` and  `Sc
 The F-stat is 3.85 and it is the same as tghe previous Q2
 
 ```{r}
-
 F_stat <- get_F_stat(PASeniors$HangHours, PASeniors$SchoolPressure)
-
 F_stat
-
 
 ```
 
@@ -139,7 +133,6 @@ abline(v = F_stat, col = "red")
 
 $\chi^2=\sum \frac{(\text { Observed }- \text { Expected })^2}{\text { Expected }}$
 
-
 ## Question 4 : Ch^2 test- What Type of Ice Cream?
 
 Sixty people were asked whether they preferred vanilla, chocolate, or strawberry ice cream and the results are shown in the table below. [Note: You may also choose to ask your class which they prefer, and use that data instead.] Perform a chi-square goodness-of-fit test to determine whether the flavors are equally popular.
@@ -154,9 +147,7 @@ Strawberry & 9 \\
 \end{tabular}
 
 
-
 1.) Write the hypothesis of this Chi-Square test.Do the hypothesized proportions have the same value? 
-
 
 2.) Find the df ( degrees of freedom ).
 
@@ -168,15 +159,11 @@ Strawberry & 9 \\
 
 * c) Calculate now the Chi-Square test statistic.
 
-
 4.) Find the p-value using `pchisq()` function. *hint*: find the function in help tab. 
-
 
 5.) Make judgment about this test.
 
-
 **Answers**:
-
 
 1.) The null hypothesis is that the flavors are equally likely to be preferred, while the alternative hypothesis is that the flavors are not equally likely to be selected.
 
@@ -186,11 +173,8 @@ $H_0: p_v= p_c=p_s=1 / 3$ and
 
 $H_a$ : Some $p_i \neq 1 / 3$.
 
-
 2.) Find the df ( degrees of freedom ).
-
 There are three categories so we have $d f=2$. Using a chi-square distribution with $d f=2$,
-
 
 3.) Calculate the Chi-Square test statistic using the formula. 
 
@@ -198,10 +182,8 @@ There are three categories so we have $d f=2$. Using a chi-square distribution w
 The expected counts:
 $60 \times 1 / 3$ = 20 in each category.
 
-
 * b) Find the contribution of each category to the Chi-Square test statistic.
-
-contribution to the chi-square statistic, $(O-E)^2 / E$, are shown as new columns in the table below.
+Contribution to the chi-square statistic, $(O-E)^2 / E$, are shown as new columns in the table below.
 
 \begin{tabular}{|l|c|c|c|}
 \hline Flavor & Observed & Expected & Contribution \\
@@ -212,18 +194,15 @@ Strawberry & 9 & 20 & 6.05 \\
 \hline
 \end{tabular}
 
-
 * c) Calculate now the Chi-Square test statistic.
 We see that the chi-square statistic is 9.7
 
 $\chi^2-test-statisti =\sum \frac{(\text { observed }- \text { expected })^2}{\text { expected }}$
 
-
 4.) Find the p-value using `pchisq()` function. *hint*: find the function in help tab. Calculate now the Chi-Square test statistic.
 we see that the p -value is 0.0078 
 
 ```{r}
-
 pchisq( 9.7, df= 2, lower.tail= F)
 
 #0.007828
@@ -236,9 +215,7 @@ So we find strong evidence that the flavors are not equally preferred.Note that 
 
 ### Question 5: Chi^2 test- Genetic Variation
 
-Genetic Variation
 Studies in genetics often involve chi-square tests. For one gene, we expect $25 \%$ of people to have the variant AA, $25 \%$ to have the variant BB , and $50 \%$ to have the variant AB . Observed counts of the three variants in one sample are shown. Do these counts provide evidence that the stated proportions are not right?
-
 
 \begin{tabular}{|c|c|}
 \hline Variant & Frequency \\
@@ -262,27 +239,20 @@ AB & 307 \\
 
 *3.c) Calculate now the Chi-Square test statistic
 
-
 4.) Find the p-value using `pchisq()` function. *hint*: find the function in help tab. 
-
 
 5.) Make judgment about this test.
 
 
-
 **Answers**
 
-1.)
-The null hypothesis is that the proportions of $p_{A A}=0.25, p_{B B}=0.25$, and $p_{A B}=0.50$ are correct, while the alternative hypothesis is at least one of the null proportions is not correct.
+1.) The null hypothesis is that the proportions of $p_{A A}=0.25, p_{B B}=0.25$, and $p_{A B}=0.50$ are correct, while the alternative hypothesis is at least one of the null proportions is not correct.
 
-
-2.) 
-There are three categories so we have $d f=2$. Using a chi-square distribution with
+2.) There are three categories so we have $d f=2$. Using a chi-square distribution with
 $df=2$.
 
 3.) 
-
- *3.a) The expected counts are : 
+ *a) The expected counts are : 
  
  For AA: 570 $\times 25 \%$ = 142.5
  
@@ -290,7 +260,7 @@ $df=2$.
  
  For AB : 570 $\times 50 \%$ = 285
  
- * 3.b) Find the contribution of each Category to the Chi^2 test statistic using $(O-E)^2 / E$
+ * b) Find the contribution of each Category to the Chi^2 test statistic using $(O-E)^2 / E$
  
 \begin{tabular}{|c|c|c|c|}
 \hline Variant & Frequency & Observed & Contribution \\
@@ -301,119 +271,23 @@ AB & 307 & 285 & 1.70 \\
 \hline
 \end{tabular}
 
+*c)  We see that the chi-square test statistic is 4.94 
 
-* 3.c)  We see that the chi-square test statistic is 4.94 
-
-
-4.) 
-
-The  p -value is 0.0845 . 
+4.) The  p -value is 0.0845 . 
 
 ```{r}
 pchisq( 4.94, df= 2, lower.tail= F)
 
 #0.08458486
-
 ```
-
-
-5.) 
-At a $5 \%$ level, we do not reject $H_0$. These data do not contradict the hypothesized proportions for these three gene variants.
-
-
-
-
-### Question 4: Genetic Variation
-
-Genetic Variation
-Studies in genetics often involve chi-square tests. For one gene, we expect $25 \%$ of people to have the variant AA, $25 \%$ to have the variant BB , and $50 \%$ to have the variant AB . Observed counts of the three variants in one sample are shown. Do these counts provide evidence that the stated proportions are not right?
-
-
-\begin{tabular}{|c|c|}
-\hline Variant & Frequency \\
-\hline AA & 142 \\
-BB & 121 \\
-AB & 307 \\
-\hline Total & 570 \\
-\hline
-\end{tabular}
-
-
-1.) Write the hypothesis of this Chi-Square test.
-
-2.) Find the df ( degrees of freedom )
-
-3.) Calculate the Chi-Square test statistic using the formula. 
-
-* a) Find the expected values for each category
-
-* b) Find the contribution of each category to the Ch-Square test statistic.
-
-* c) Calculate now the Chi-Square test statistic
-
-
-4.) Find the p-value using `pchisq()` function. *hint*: find the function in help tab. 
-
-
-5.) Make judgment about this test.
-
-
-
-**Answers**
-
-1.)
-The null hypothesis is that the proportions of $p_{A A}=0.25, p_{B B}=0.25$, and $p_{A B}=0.50$ are correct, while the alternative hypothesis is at least one of the null proportions is not correct.
-
-
-2.) 
-There are three categories so we have $d f=2$. Using a chi-square distribution with
-$df=2$.
-
-3.) 
-* a) The expected counts are : 
- 
- For AA: 570 $\times 25 \%$ = 142.5
- 
- For BB: 570 $\times 25 \%$ = 142.5 
- 
- For AB : 570 $\times 50 \%$ = 285
- 
-* b) Find the contribution of each Category to the Chi^2 test statistic using $(O-E)^2 / E$
- 
-\begin{tabular}{|c|c|c|c|}
-\hline Variant & Frequency & Observed & Contribution \\
-\hline AA & 142 & 142.5 & 0.00 \\
-BB & 121 & 142.5 & 3.24 \\
-AB & 307 & 285 & 1.70 \\
-\hline Total & 570 & & 4.94 \\
-\hline
-\end{tabular}
-
-
-* c)  We see that the chi-square test statistic is 4.94 
-
-
-4.) 
-
-The  p -value is 0.0845 . 
-
-```{r}
-pchisq( 4.94, df= 2, lower.tail= F)
-
-#0.08458486
-
-```
-
-
-5.) 
-At a $5 \%$ level, we do not reject $H_0$. These data do not contradict the hypothesized proportions for these three gene variants.
+5.) At a $5 \%$ level, we do not reject $H_0$. These data do not contradict the hypothesized proportions for these three gene variants.
 
 # *Part 3*
 # Inference for Linear Regression
 
 Hypothesis testing can be done for more than sample means and proportions. We can also test hypotheses relating to regression parameters, like $\beta_1$, the slope, and $\beta_0$, the y-intercept. The hypotheses typically test whether the parameter is greater than zero, less than zero, or not equal to zero.
 
-# Question 5: Hypothesis Testing for Regression Slope $\beta_1$
+# Question 6: Hypothesis Testing for Regression Slope $\beta_1$
 
 Do triples lead to more wins? A "triple" in baseman occurs when a batter hits a ball in play, and is able to advance three bases (i.e., make it to third base). However, triples have become less common due to improvements in defensive positioning and outfielder speed. Perform a hypothesis test to see if hitting more triples is linearly associated with earning more wins. The data is available in the `BaseballHits2014` data set from the `Lock5Data` library.
 
