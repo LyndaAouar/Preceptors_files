@@ -16,7 +16,7 @@ editor_options:
 $\chi^2=\sum \frac{(\text { Observed }- \text { Expected })^2}{\text { Expected }}$
 
 
-## Question 1 : Ch^2 test - What Type of Ice Cream?
+## Question 1 : Chi-Square ($\chi^2$) test- What Type of Ice Cream?
 
 Sixty people were asked whether they preferred vanilla, chocolate, or strawberry ice cream and the
 results are shown in the table below. Perform a chi-square goodness-of-fit test to determine whether the
@@ -80,8 +80,8 @@ In symbols:
 
 * $H_0: \pi_v=  \pi_c=  \pi_s= 1/3$ 
 
-*
-$H_a$: Some  $\pi_i  \neq  1/3$
+
+* $H_a$: Some  $\pi_i  \neq  1/3$
 
 
 2.) Find the df ( degrees of freedom ).
@@ -122,16 +122,15 @@ $\\$
  
   c) Calculate now the Chi-Square test statistic.
 
-We see that the chi-square statistic is 9.7
+We can see that the chi-square statistic is 9.7
 
 $\chi^2-test-statisti =\sum \frac{(\text { observed }- \text { expected })^2}{\text { expected }}$
 
 
 
-4.) Find the p-value using `pchisq()` function. *hint*: find the function in help tab. Calculate now the
-Chi-Square test statistic.
+4.) Find the p-value using `pchisq()` function. *hint*: find the function in help tab. Calculate now the Chi-Square test statistic. 
 
-we see that the p-value is 0.0078 
+We can see that the p-value is 0.0078 
 
 
 ```{r}
@@ -144,19 +143,17 @@ pchisq( 9.7, df= 2, lower.tail= F)
 
 5.) Make judgment about this test.
 
-So we find strong evidence that the flavors are not equally preferred. Note that the strongest
-contributor to the chi-square statistic is the count for strawberry, which is below the expected count.
+The data provides strong evidence that the flavors are not equally preferred. (Note that the strongest
+contributor to the chi-square statistic is the count for strawberry, which is below the expected count).
 
 
 $\\$
 
 
-### Question 2: Chi^2 test- Genetic Variation
+### Question 2: Chi-Square ($\chi^2$) test- Genetic Variation
 
 Studies in genetics often involve chi-square tests. For one gene, we expect $25 \%$ of people to have
-the variant AA, $25 \%$ to have the variant BB , and $50 \%$ to have the variant AB . Observed counts of
-the three variants in one sample are shown. Do these counts provide evidence that the stated proportions
-are not right?
+the variant AA, $25 \%$ to have the variant BB , and $50 \%$ to have the variant AB . Observed counts of the three variants in one sample are shown. Do these counts provide evidence that the stated proportions are not right?
 
 
 $\\$
@@ -185,7 +182,7 @@ $\\$
   a) Find the expected values for each category.
 
 
-  b) Find the contribution of each category to the Ch-Square test statistic.
+  b) Find the contribution of each category to the Chi-Square test statistic.
 
 
   c) Calculate now the Chi-Square test statistic.
@@ -211,8 +208,7 @@ $\\$
 While the alternative hypothesis is at least one of the null proportions is not correct.
 
 
-2.) There are three categories so we have $d f=2$. Using a chi-square distribution with
-$df=2$.
+2.) There are three categories so we have $d f=2$. Using a chi-square distribution with $df=2$.
 
 
 3.) 
@@ -278,7 +274,7 @@ A survey given to a sample of high school seniors in Pennsylvania in the data `P
 We wish to test whether the amount of school pressure felt by students is related to the mean time hanging out with friends. 
 
 
-1.)Prepare the data and clean it using `na.omit(my_dataframe)`.
+1.) Prepare the data and clean it using `na.omit(my_dataframe)`.
 
 
 ```{r}
@@ -304,7 +300,8 @@ cPASeniors<- na.omit(PASeniors)
 
 
 5.) Use the function `aov(Response ~ grouping, data= )` to find the summary statistics for the ANOVA test.
-Indicate the F-stat and the p-value.
+
+Report the F-stat and the p-value.
 
 
 ```{r}
@@ -336,7 +333,11 @@ boxplot(HangHours ~ SchoolPressure, data= cPASeniors)
 
 mosaic::favstats(HangHours ~ SchoolPressure, data= cPASeniors)
 
+# create the ANOVA model
 anova_model<- aov( HangHours ~ SchoolPressure, data= cPASeniors)
+
+# summary statistics of the ANOVA model
+
 summary(anova_model)
 ```
 
@@ -368,7 +369,7 @@ Using the previous data `PASeniors`, and the two variables  `HangHours` and  `Sc
 2.) Create the null distribution and use `abline` to designate the F-stat. 
 
 
-3.) Now calculate the p-values from the randomization and compare it to the previous p-value in question 3.
+3.) Now calculate the p-values from the randomization and compare it to the previous p-value in Question 3.
 
 4.) How many `k`  groups are in the `PASeniors`? What is the sample size N? Create the F distribution density curve using the function `df()`, and the **two degrees of freedom**: `df 1= k-1` and the `df 2= n-k`.
 
@@ -378,7 +379,7 @@ Plot this density curve on the same histogram of the randomization distribution.
 **Answers:**
 
 
-1.) Find the F-test-statistic using the function ` get_F_stat()`. Compare it to Q2.
+1.) Find the F-test-statistic using the function ` get_F_stat()`. Compare it to Question 3.
 
 
 ```{r}
@@ -387,7 +388,7 @@ F_stat
 
 ```
 
-The F-stat is 2.798 and it is the same as the previous F-stat found in Q1.
+The F-stat is 2.798 and it is the same as the previous F-stat found in Questions 3.
 
 
 
@@ -421,10 +422,10 @@ p_value
 
 ```
  
- he p-value is 0.0439 which is the same as the p-value found in Q1. (The answers may vary due to the randomization).
+The p-value is 0.0439 which is the same as the p-value found in Question 3. (The answers may vary due to the randomization).
  
  
-4.) How many `k`  groups are in the `PASeniors`? What is the sample size N? Create the F distribution density curve using the function `df()`, and the **two degrees of freedom**: `df 1= k-1` and the `df 2= n-k`.
+4.) How many `k`  groups are in the `PASeniors`? What is the sample size N? Create the F distribution density curve using the function `df()`, and the **two degrees of freedom** of the F-density are: `df 1= k-1` and the `df 2= n-k`.
 
 Plot this density curve on the same histogram of the randomization distribution.
 
@@ -432,10 +433,11 @@ Plot this density curve on the same histogram of the randomization distribution.
 
 # Plot the F-distribution
 
-k<- 4
-n<- 355
-df1<- k-1
-df2<- n-k
+k<- 4          # number of groups
+n<- 355        # sample size
+
+df1<- k-1      # degrees of freedom of the "Between Variation"
+df2<- n-k      # degrees of freedom of the "Within Variation"
 
 
 # Density histogram 
@@ -457,62 +459,3 @@ abline(v = F_stat, col = "red2")
 ```
 
 $\\$
-
-
-# *Part 3*
-
-# Inference for Linear Regression
-
-Hypothesis testing can be done for more than sample means and proportions. We can also test hypotheses relating to regression parameters, like $\beta_1$, the slope, and $\beta_0$, the y-intercept. The hypotheses typically test whether the parameter is greater than zero, less than zero, or not equal to zero.
-
-# Question 5: Hypothesis Testing for Regression Slope $\beta_1$
-
-Do triples lead to more wins? A "triple" in baseman occurs when a batter hits a ball in play, and is able to advance three bases (i.e., make it to third base). However, triples have become less common due to improvements in defensive positioning and outfielder speed. Perform a hypothesis test to see if hitting more triples is linearly associated with earning more wins. The data is available in the `BaseballHits2014` data set from the `Lock5Data` library.
-
-a) Create a scattersplot to visualize the relationship between `Wins` and `Triples`
-
-```{r}
-library(Lock5Data)
-library(SDS1000)
-plot(BaseballHits2014$Triples, BaseballHits2014$Wins, xlab = "Number of Triples",
-     ylab = "Number of Wins", main = "Wins vs Triples in the 2014 MLB Season")
-```
-
-b) State the null and alternative hypotheses using symbols
-
-* $H_0: \beta_1 = 0$
-* $H_A: \beta_1 > 0$
-
-c) Fit the regression model with `Wins` as the outcome, and `Triples` as the predictor. Extract the slope coefficient by using the `coef()` function, and selecting the second value (e.g., `coef(my_model)[2]`).
-
-```{r}
-triple_mod = lm(data = BaseballHits2014, Wins ~ Triples)
-obs_beta1 = coef(triple_mod)[2]
-obs_beta1
-```
-
-d) Create a null distribution by using the `do_it` function. The approach you will want to take is to fit a regression model inside the `do_it` call (maybe call it `curr_model`), and you will use `Wins` as the outcome, and a shuffled `Triples` as the predictor. You can shuffle the `Triples` variable using the `shuffle()` function. Extract the slope coefficient after fitting each model.
-
-```{r}
-null_dist_triples = do_it(10000) * {
-  curr_mod = lm(data = BaseballHits2014, Wins ~ shuffle(Triples))
-  coef(curr_mod)[2]
-}
-```
-
-e) Plot a histogram of your null distribution, and add a red vertical line at the observed slope
-
-```{r}
-hist(null_dist_triples, main = "Null Distribution of Slope")
-abline(v = obs_beta1, col = "red")
-```
-
-f) Calculate the p-value by seeing the proportion of null values that are more extreme than the one you observed.
-
-```{r}
-pnull(obs_beta1, null_dist_triples, lower.tail = F)
-```
-
-g) State your conclusion.
-
-**Since our p-value is greater than 0.05, we will fail to reject the null hypothesis. We therefore do not have evidence that hitting more triples is linearly associated with earning more wins.**
