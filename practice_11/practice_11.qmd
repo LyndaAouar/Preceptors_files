@@ -1,0 +1,124 @@
+---
+title: "Practice Session 11"
+format: pdf
+editor: source
+editor_options: 
+  chunk_output_type: console
+---
+
+# Part 1 Review of Inference for (Simple) Linear Regression
+
+As we saw last week, hypothesis testing can be done for more than sample means and proportions. We can also test hypotheses relating to regression parameters, like $\beta_1$, the slope, and $\beta_0$, the y-intercept. The hypotheses typically test whether the parameter is greater than zero, less than zero, or not equal to zero.
+
+# Question 1
+
+a) Create a scattersplot to visualize the relationship between `` and ``
+
+```{r}
+# your code here
+
+```
+
+b) State the null and alternative hypotheses using symbols
+
+c) Fit the regression model with `` as the outcome, and `` as the predictor. Extract the slope coefficient by using the `coef()` function, and selecting the second value (e.g., `coef(my_model)[2]`).
+
+```{r}
+# your code here
+```
+
+d) Create a null distribution by using the `do_it` function. The approach you will want to take is to fit a regression model inside the `do_it` call (maybe call it `curr_model`), and you will use `` as the outcome, and a shuffled `` as the predictor. You can shuffle the `` variable using the `shuffle()` function. Extract the slope coefficient after fitting each model.
+
+```{r}
+# your code here
+```
+
+e) Plot a histogram of your null distribution, and add a red vertical line at the observed slope
+
+```{r}
+# your code here
+```
+
+f) Calculate the p-value by seeing the proportion of null values that are more extreme than the one you observed.
+
+```{r}
+# your code here
+```
+
+g) State your conclusion.
+
+h) Compare your final result to the output from using the `summary()` function on your regression model. What do you notice?
+
+```{r}
+# your code here
+```
+
+# Question 2
+
+a) Create a scattersplot to visualize the relationship between `` and ``
+
+```{r}
+# your code here
+
+```
+
+b) State the null and alternative hypotheses using symbols
+
+c) Fit the regression model with `` as the outcome, and `` as the predictor. Extract the slope coefficient by using the `coef()` function, and selecting the second value (e.g., `coef(my_model)[2]`).
+
+```{r}
+# your code here
+```
+
+d) Create a null distribution by using the `do_it` function. The approach you will want to take is to fit a regression model inside the `do_it` call (maybe call it `curr_model`), and you will use `` as the outcome, and a shuffled `` as the predictor. You can shuffle the `` variable using the `shuffle()` function. Extract the slope coefficient after fitting each model.
+
+```{r}
+# your code here
+```
+
+e) Plot a histogram of your null distribution, and add a red vertical line at the observed slope
+
+```{r}
+# your code here
+```
+
+f) Calculate the p-value by seeing the proportion of null values that are more extreme than the one you observed.
+
+```{r}
+# your code here
+```
+
+g) State your conclusion.
+
+h) Compare your final result to the output from using the `summary()` function on your regression model. What do you notice?
+
+```{r}
+# your code here
+```
+
+# Part 2 Inference for (Multiple) Linear Regression
+
+So far, we have fit regression models where we had a single predictor or variable relating to our outcome variable. However, we often are interested in understanding the relationship among the outcome and two or more other variables. Regression with more than one predictor is known as multiple linear regression. 
+
+# Question 3
+
+
+
+# Question 4
+
+
+# Part 3 Introduction to `t.test()` and `prop.test()` for Hypothesis Testing
+
+In the following exercises, you will get practice using `t.test()` and `prop.test()` to perform hypothesis tests. Use the `?` to get help with these functions.
+
+# Question 5
+
+
+
+# Question 6
+
+
+
+
+
+
