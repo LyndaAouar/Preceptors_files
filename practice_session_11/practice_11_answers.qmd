@@ -147,31 +147,124 @@ plot(log(fish$Weight), fish$Height, xlab = "Log(Weight)", ylab = "Height (cm)",
 So far, we have fit regression models where we had a single predictor or variable relating to our outcome variable. However, we often are interested in understanding the relationship among the outcome and two or more other variables. Regression with more than one predictor is known as multiple linear regression. 
 
 
-# *Part 2* : Multiple regression
+# Part 2: Multiple regression
 
 # Question 3
 
-Try to predict a movie's revenue (domgross_2013) from:
-  1) year
-  2) whether it passed the Bechdel test
-  3) the movie's budget
+
+Predicting `Armspan`  from both `Height` and `Foot`  (Footlength)  a sample of high school students in `PASenior`. How well do they work together in a multiple regression model to predict Armspan?
+
+
+```{r}
+library(SDS1000)
+library(Lock5Data)
+data(PASeniors)
+
+cPASeniors<- na.omit(PASeniors)
+```
+
+
+1.) Fit a simple linear regression model to predict `Armspan` from `Height`.
+
+2.) Fit a simple linear regression model to predict `Armspan` foot length in  `Foot`.
+
+
+3.) Compare the two models in terms of : the significance of the predictors, the standard deviation of the residuals and the Coefficient of determination $R^2$.
+
+
+a) Find the slope for each model. Which predictor has a larger slope?
+
+b) Find the standard deviation of the error term for each model. Which predictor has a smaller standard deviation of the error term?
+
+c) Find the percentage of variability in arm span explained by each predictor. Which predictor explains more variability?
+
+d) Based on parts a)–c), which variable is more effective for predicting arm span?
+
+
+
+
+4) Now fit a multiple linear regression to predict `ArmSpan` from the two predictors: foot length in  `Foot` and `Height`.
+
+
+a) What arm span would the fitted model predict for a student who is 180 cm tall and has a foot that is 26 cm long?
+
+b) Are both Height and Foot useful in the multiple linear regression  model for Armspan? Justify your answer.
+
+c) How much of the variability in Armspan do the two predictors together explain?
+
+
+**Answers**
+
+```{r}
+library(SDS1000)
+library(Lock5Data)
+data(PASeniors)
+
+cPASeniors<- na.omit(PASeniors)
+```
+
+
+1.) Fit a simple linear regression model to predict `ArmSpan` from `Height`.
 
 ```{r}
 
+# fit a simple linear regression to predict `Armspan` from ` Height`
 
 
-columns_to_use <- c("year", "binary", "budget_2013", "domgross_2013")
-
-bechdel2 <- bechdel[, columns_to_use]
+summary(lm(Armspan ~ Height, data = cPASeniors))
 
 
-lm_fit <- lm(domgross_2013 ~ ., data = bechdel2)
-
-
-summary(lm_fit)
-
-
-# Question 4
+```
 
 
 
+2.) Fit a simple linear regression model to predict `Armspan` foot length in  `Foot`.
+
+```{r}
+
+# fit a simple linear regression to predict `Armspan` from ` Foot`
+
+
+summary(lm(Armspan ~  Foot, data = cPASeniors))
+
+```
+
+
+3.) Compare the two models in terms of : the significance of the predictors, the standard deviation of the residuals and the Coefficient of determination $R^2$.
+
+
+
+a) Foot ( $b1$= 3.4835) has a larger slope than Height ($b1= 0.91491$).
+
+b) Height ( $se =9.414$) has a smaller standard deviation of error than Foot ($se = 9.937$).
+
+c) Height with $R^2=51.5 \%$ explains more variability in arms span than Foot with
+$R^2=46.0 \%$.  
+
+d) Both the smaller standard deviation of error in (b) and the larger $R^2$. In (c) indicate that Height is somewhat more effective than Foot for predicting Armspan. The larger slope for Foot is not so relevant since it also has a much larger standard error for the slope.
+
+
+
+4) Now fit a multiple linear regression to predict `ArmSpan` from the two predictors: foot length in  `Foot` and `Height`.
+
+
+
+```{r}
+
+# fit a simple linear regression to predict `Armspan` from ` Foot` and ` Height`
+
+summary(lm(Armspan ~  Height + Foot, data = cPASeniors))
+
+```
+
+ 
+a) The fitted model is Armspan $=8.52+0.7356 \cdot$ Height $+1.4477 \cdot$ Foot. For a student with Height $=180$ and Foot $=26$ the predicted arm span is
+
+$$
+\widehat{\operatorname{Armsp}} a n=8.52+0.7356 \cdot 180+1.4477 \cdot 26=178.55
+$$
+
+b) The p-values for the individual t-tests for both predictors are essentially zero, so we have strong evidence that both Height and Foot are effective in this model to predict Armspan.
+
+
+c) The output shows $R^2=61.75 \%$, so the model based on Height and Foot explains $61.75 \%$ of the variability of the Armspan measurements for these students.
