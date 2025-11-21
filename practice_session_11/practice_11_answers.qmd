@@ -146,10 +146,10 @@ plot(log(fish$Weight), fish$Height, xlab = "Log(Weight)", ylab = "Height (cm)",
 
 So far, we have fit regression models where we had a single predictor or variable relating to our outcome variable. However, we often are interested in understanding the relationship among the outcome and two or more other variables. Regression with more than one predictor is known as multiple linear regression. 
 
+
+# *Part 2* : Multiple regression
+
 # Question 3
-# Multiple regression
-
-
 
 Try to predict a movie's revenue (domgross_2013) from:
   1) year
