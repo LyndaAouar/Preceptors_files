@@ -147,7 +147,28 @@ plot(log(fish$Weight), fish$Height, xlab = "Log(Weight)", ylab = "Height (cm)",
 So far, we have fit regression models where we had a single predictor or variable relating to our outcome variable. However, we often are interested in understanding the relationship among the outcome and two or more other variables. Regression with more than one predictor is known as multiple linear regression. 
 
 # Question 3
+# Multiple regression
 
+
+
+Try to predict a movie's revenue (domgross_2013) from:
+  1) year
+  2) whether it passed the Bechdel test
+  3) the movie's budget
+
+```{r}
+
+
+
+columns_to_use <- c("year", "binary", "budget_2013", "domgross_2013")
+
+bechdel2 <- bechdel[, columns_to_use]
+
+
+lm_fit <- lm(domgross_2013 ~ ., data = bechdel2)
+
+
+summary(lm_fit)
 
 
 # Question 4
